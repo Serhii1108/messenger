@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  background: #1D1D1D;
+  background-image:url('./assets/images/bg.jpg');
+  background-size: cover;
+  background-position:center;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+span,
+div,
+a {
+  margin: 0;
+  padding: 0;
+  color: #EDEDED;
+  font-family: 'Inter', sans-serif;
+}
+ul, li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+a::first-letter,
+button::first-letter {
+  text-transform: capitalize;
+}
