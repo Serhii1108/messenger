@@ -10,10 +10,10 @@ body {
   font-size: 20px;
   font-weight: 500;
   font-family: 'Inter', sans-serif;
-  background: #1D1D1D;
-  background-image:url('./assets/images/bg.jpg');
+  background: #1d1d1d;
+  background-image: url('./assets/images/bg.jpg');
   background-size: cover;
-  background-position:center;
+  background-position: center;
   box-sizing: border-box;
   overflow-x: hidden;
 }
@@ -27,10 +27,11 @@ div,
 a {
   margin: 0;
   padding: 0;
-  color: #EDEDED;
+  color: #ededed;
   font-family: 'Inter', sans-serif;
 }
-ul, li {
+ul,
+li {
   list-style: none;
 }
 a {
