@@ -1,0 +1,8 @@
+{
+  "header": {
+    "nav": {
+      "login": "login",
+      "signUp": "sign up"
+    }
+  }
+}
