@@ -4,5 +4,9 @@
       "login": "login",
       "signUp": "sign up"
     }
+  },
+  "pageNotFound": {
+    "subtitle": "Something went wrong...",
+    "button": "Main page"
   }
 }

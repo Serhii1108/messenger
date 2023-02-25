@@ -1,0 +1,31 @@
+.page-not-found {
+  position: absolute;
+  left: 65%;
+  top: 30%;
+
+  .page-content {
+    text-align: center;
+
+    &__title {
+      font-size: 15rem;
+      line-height: 12rem;
+      font-family: 'Inter';
+    }
+
+    &__subtitle {
+      margin-top: 50px;
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
+
+    &__return-btn {
+      margin-top: 40px;
+
+      button {
+        font-size: 1.2rem;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+    }
+  }
+}
