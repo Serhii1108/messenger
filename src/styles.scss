@@ -1,17 +1,23 @@
+@import 'constance';
+
 html,
 body {
-  height: 100%;
-  font-size: 20px;
+  height: 100vh;
+  font-size: $basic-font-size;
   scroll-behavior: smooth;
 }
 body {
+  position: relative;
+  width: 100%;
   margin: 0;
   padding: 0;
   font-weight: 500;
-  font-family: 'Inter', sans-serif;
+  font-family: $secondary-font;
   background: #1d1d1d;
   background-image: url('./assets/images/bg.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
   box-sizing: border-box;
   overflow-x: hidden;
@@ -22,18 +28,24 @@ a {
   margin: 0;
   padding: 0;
   color: #ededed;
-  font-family: 'Inter', sans-serif;
+  font-family: $secondary-font;
 }
 h1,
 h2,
 h3,
-h4,
-span {
+h4 {
   margin: 0;
   padding: 0;
   color: #ededed;
-  font-family: 'Signika', sans-serif;
+  font-family: $primary-font;
   letter-spacing: 1.5px;
+}
+button {
+  font-family: $primary-font !important;
+  letter-spacing: 1.5px;
+}
+button.primary-bg {
+  background-color: $primary-color !important;
 }
 ul,
 li {
