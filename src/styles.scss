@@ -63,3 +63,12 @@ a::first-letter,
 button::first-letter {
   text-transform: capitalize;
 }
+
+.container {
+  position: absolute;
+  left: 65%;
+  top: 25%;
+
+  width: 100%;
+  max-width: 580px;
+}

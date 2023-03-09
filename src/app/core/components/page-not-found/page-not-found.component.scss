@@ -1,16 +1,14 @@
 @import '/src/constance';
 
 .page-not-found {
-  position: absolute;
-  left: 65%;
-  top: 30%;
+  margin-top: 100px;
 
   .page-content {
     text-align: center;
 
     &__title {
       font-size: 30rem;
-      line-height: 24rem;
+      line-height: 24rem !important;
       font-family: $secondary-font;
     }
 
