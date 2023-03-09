@@ -34,11 +34,12 @@ h1,
 h2,
 h3,
 h4 {
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
   color: #ededed;
-  font-family: $primary-font;
-  letter-spacing: 1.5px;
+  font-family: $primary-font !important;
+  letter-spacing: 1.5px !important;
+  line-height: normal !important;
 }
 button {
   font-family: $primary-font !important;
