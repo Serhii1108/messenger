@@ -8,5 +8,16 @@
   "pageNotFound": {
     "subtitle": "Something went wrong...",
     "button": "Main page"
+  },
+  "form": {
+    "title": "Sign up",
+    "field": {
+      "login": "Login",
+      "password": "Password",
+      "phone": "Phone"
+    },
+    "button": "Sign up",
+    "haveAccount": "Already have an account?",
+    "login": "login"
   }
 }

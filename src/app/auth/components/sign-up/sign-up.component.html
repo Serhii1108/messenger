@@ -1,0 +1,39 @@
+<section class="container">
+  <div class="sign-up-page">
+    <h3 class="title">{{ 'form.title' | translate }}</h3>
+
+    <form [formGroup]="signUpForm">
+      <mat-form-field>
+        <mat-label>{{ 'form.field.login' | translate }}</mat-label>
+        <input matInput formControlName="loginInput" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'form.field.password' | translate }}</mat-label>
+        <input matInput formControlName="passwordInput" required />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>{{ 'form.field.phone' | translate }}</mat-label>
+
+        <input matInput formControlName="phoneInput" required />
+      </mat-form-field>
+
+      <button
+        mat-flat-button
+        color="primary"
+        class="primary-bg submit-btn"
+        type="submit"
+      >
+        {{ 'form.button' | translate }}
+      </button>
+    </form>
+
+    <div class="login-btn">
+      <p>{{ 'form.haveAccount' | translate }}</p>
+      <button mat-button color="primary" routerLink="/auth/login">
+        {{ 'form.login' | translate }}
+      </button>
+    </div>
+  </div>
+</section>

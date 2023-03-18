@@ -65,10 +65,23 @@ button::first-letter {
 }
 
 .container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   position: absolute;
   left: 65%;
   top: 25%;
 
   width: 100%;
   max-width: 580px;
+}
+
+// Form
+.mat-focused .mat-form-field-label {
+  color: $chat-color !important;
+}
+
+.mat-form-field-ripple {
+  background-color: $chat-color !important;
 }
