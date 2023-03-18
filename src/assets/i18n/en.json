@@ -10,14 +10,24 @@
     "button": "Main page"
   },
   "form": {
-    "title": "Sign up",
+    "title": {
+      "login":"Login",
+      "signUp": "Sign up"
+    },
     "field": {
       "login": "Login",
       "password": "Password",
       "phone": "Phone"
     },
-    "button": "Sign up",
-    "haveAccount": "Already have an account?",
-    "login": "login"
+    "button": {
+      "signUp": "Sign up",
+      "login": "Login"
+    },
+    "haveAccount": {
+      "posQuestion": "Already have an account?",
+      "negQuestion": "Do not have an account?",
+      "login": "login",
+      "signUp": "Sign up"
+    }
   }
 }

@@ -1,6 +1,6 @@
 @import '/src/constance';
 
-.sign-up-page {
+.login-page {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -27,9 +27,10 @@
     }
   }
 
-  .login-btn {
+  .sign-up-btn {
     display: flex;
     flex-direction: column;
+    text-align: center;
 
     p {
       font-size: 1.7rem;
