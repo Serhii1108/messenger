@@ -17,7 +17,7 @@ export class ApiInterceptor implements HttpInterceptor {
     if (req.url.includes('i18n')) return next.handle(req);
 
     const apiReq: HttpRequest<unknown> = req.clone({
-      url: `${environment.apiUrl}${req.url}`,
+      url: `${environment.apiUrl}/${req.url}`,
     });
 
     return next.handle(apiReq);
