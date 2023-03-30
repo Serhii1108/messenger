@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from './core/services/api.service';
+import { ApiInterceptor } from './core/interceptors/api.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -33,7 +34,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       },
     }),
   ],
-  providers: [ApiService],
+  providers: [
+    ApiService,
+    [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
