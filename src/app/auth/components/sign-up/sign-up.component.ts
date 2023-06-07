@@ -17,6 +17,7 @@ import {
   SignUpUserModel,
 } from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -30,7 +31,10 @@ export class SignUpComponent {
     phoneInput: new FormControl('', Validators.pattern(phoneValidation)),
   });
 
-  public constructor(private authService: AuthService) {}
+  public constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   private get fields(): {
     [key: string]: AbstractControl;
@@ -57,6 +61,7 @@ export class SignUpComponent {
             .subscribe((tokens: LoginResponseModel) => {
               localStorage.setItem('user', JSON.stringify(data));
               localStorage.setItem('tokens', JSON.stringify(tokens));
+              this.router.navigateByUrl('/chat');
             });
         });
     }

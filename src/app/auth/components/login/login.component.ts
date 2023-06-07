@@ -2,8 +2,13 @@ import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { lengthValidation, passwordValidation } from '../../constance';
-import { LoginResponseModel, LoginUserModel } from '../../models/user.model';
+import {
+  BasicResponseModel,
+  LoginResponseModel,
+  LoginUserModel,
+} from '../../models/user.model';
 import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +21,10 @@ export class LoginComponent {
     passwordInput: new FormControl('', Validators.pattern(passwordValidation)),
   });
 
-  public constructor(private authService: AuthService) {}
+  public constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   public login(): void {
     if (this.loginForm.valid) {
@@ -29,6 +37,13 @@ export class LoginComponent {
         .login(userData)
         .subscribe((tokens: LoginResponseModel) => {
           localStorage.setItem('tokens', JSON.stringify(tokens));
+
+          this.authService
+            .getUserByLogin(userData.login)
+            .subscribe((user: BasicResponseModel) => {
+              localStorage.setItem('user', JSON.stringify(user));
+              this.router.navigateByUrl('/chat');
+            });
         });
     }
   }

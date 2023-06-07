@@ -12,6 +12,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ApiService } from './core/services/api.service';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
+import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -36,7 +37,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   ],
   providers: [
     ApiService,
-    [{ provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true }],
+    [
+      { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+      { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    ],
   ],
   bootstrap: [AppComponent],
 })

@@ -26,8 +26,20 @@ export class ApiService {
     return this.httpClient.post<BasicResponseModel>('auth/signup', userData);
   }
 
+  public refresh(refreshToken: string): Observable<LoginResponseModel> {
+    return this.httpClient.post<LoginResponseModel>('auth/refresh', {
+      refreshToken,
+    });
+  }
+
   public getAllUsers(): Observable<BasicResponseModel[]> {
     return this.httpClient.get<BasicResponseModel[]>('api/users');
+  }
+
+  public getUserByLogin(userLogin: string): Observable<BasicResponseModel> {
+    return this.httpClient.get<BasicResponseModel>(
+      `api/users/login/${userLogin}`
+    );
   }
 
   public updateUser(

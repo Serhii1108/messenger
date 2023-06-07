@@ -23,6 +23,20 @@ export class AuthService {
     return this.apiService.signUp(userData);
   }
 
+  public getUserByLogin(userLogin: string): Observable<BasicResponseModel> {
+    return this.apiService.getUserByLogin(userLogin);
+  }
+
+  public refreshToken(refreshToken: string): Observable<LoginResponseModel> {
+    return this.apiService.refresh(refreshToken);
+  }
+
+  public getTokens(): LoginResponseModel | null {
+    const tokens: string | null = localStorage.getItem('tokens');
+
+    return tokens ? JSON.parse(tokens) : null;
+  }
+
   public logout(): void {
     localStorage.removeItem('tokens');
     localStorage.removeItem('user');
