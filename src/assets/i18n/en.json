@@ -1,8 +1,8 @@
 {
-  "header": {
-    "nav": {
-      "login": "login",
-      "signUp": "sign up"
+  "mainPage": {
+    "buttons": {
+      "login": "Login",
+      "signUp": "Sign up"
     }
   },
   "pageNotFound": {

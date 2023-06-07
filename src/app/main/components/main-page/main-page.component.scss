@@ -18,9 +18,8 @@
 
   .auth-btns-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     margin: 0 auto;
-    width: 370px;
     margin-top: 60px;
 
     button {

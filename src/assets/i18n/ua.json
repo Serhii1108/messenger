@@ -1,8 +1,8 @@
 {
-  "header": {
-    "nav": {
-      "login": "Вхід",
-      "signUp": "Реєстрація"
+  "mainPage": {
+    "buttons": {
+      "login": "Увійти",
+      "signUp": "Зареєструватися"
     }
   },
   "pageNotFound": {
@@ -11,7 +11,7 @@
   },
   "form": {
     "title": {
-      "signUp":"Зареєструватися",
+      "signUp":"Реєстрація",
       "login":"Вхід"
     },
     "field": {
