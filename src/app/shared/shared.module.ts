@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -24,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
+    MatBadgeModule,
     MatRadioModule,
     MatCardModule,
     MatInputModule,
