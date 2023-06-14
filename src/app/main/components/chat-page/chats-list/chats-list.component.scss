@@ -1,0 +1,34 @@
+@import "/src/constance";
+
+.chats-list {
+  background-color: $secondary-color-dark;
+  height: 100vh;
+  width: 500px;
+  padding-top: 20px;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px 0 10px;
+
+    .menu-btn {
+      line-height: 45px;
+      width: 45px;
+      height: 45px;
+
+      .mat-icon {
+        font-size: 35px;
+        width: 100%;
+        height: 100%;
+        line-height: 45px;
+      }
+    }
+
+    .search-field {
+      width: 100%;
+      margin-left: 15px;
+      font-size: 2rem;
+    }
+  }
+}

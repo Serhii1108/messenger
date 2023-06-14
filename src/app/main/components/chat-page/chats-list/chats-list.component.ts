@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './chats-list.component.html',
   styleUrls: ['./chats-list.component.scss'],
 })
-export class ChatsListComponent {}
+export class ChatsListComponent {
+  public searchValue: string = '';
+}

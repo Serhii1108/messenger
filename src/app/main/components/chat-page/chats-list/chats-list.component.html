@@ -1,1 +1,25 @@
-<section class="chats-list"></section>
+<section class="chats-list">
+  <div class="chats-list__header">
+    <button mat-icon-button class="menu-btn" color="accent">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-form-field class="search-field">
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchValue"
+        placeholder="Search"
+      />
+      <button
+        *ngIf="searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchValue = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+  </div>
+</section>
