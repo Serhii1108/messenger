@@ -8,4 +8,5 @@ import { Component } from '@angular/core';
 export class ChatsListComponent {
   public searchValue: string = '';
   public groups: [] = [];
+  public contacts: [] = [];
 }

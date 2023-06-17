@@ -1,6 +1,9 @@
 @import '/src/constance';
 
 .chats-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
   background-color: $secondary-color-dark;
   height: 100vh;
   width: 500px;
@@ -9,6 +12,7 @@
 
   ::-webkit-scrollbar {
     height: 6px;
+    width: 8px;
     background-color: transparent;
     border-radius: 30px;
   }
@@ -47,13 +51,12 @@
     display: flex;
     column-gap: 50px;
     width: 460px;
-    padding: 20px 0 10px 0;
+    padding: 12px 0 10px 0;
     margin: 0 auto;
     overflow-x: scroll;
 
     .group {
       font-size: 1.5rem;
-      text-wrap: nowrap;
       height: 25px;
       user-select: none;
       cursor: pointer;
@@ -76,5 +79,15 @@
         width: 100%;
       }
     }
+  }
+
+  &__contacts {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-top: 20px;
+    padding: 0 8px;
+    overflow-y: scroll;
   }
 }

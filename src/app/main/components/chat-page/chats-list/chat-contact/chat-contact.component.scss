@@ -1,0 +1,66 @@
+@import '/src/constance';
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.03s linear;
+    background-color: rgba(217, 217, 217, 0.2);
+  }
+
+  &.active {
+    background-color: rgba(217, 217, 217, 0.2);
+    border-radius: 0 10px 10px 0;
+    border-left: 3px solid $primary-color;
+  }
+
+  &__icon {
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+
+  &__title {
+    flex: 2;
+    margin-left: 15px;
+
+    .name {
+      font-size: 1.8rem;
+    }
+
+    .message {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 330px;
+      margin: 0;
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+
+    .last-message-time {
+      margin: 0;
+    }
+
+    .icons {
+      margin-top: 10px;
+      img {
+        width: 15px;
+      }
+    }
+  }
+}
