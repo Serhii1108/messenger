@@ -51,7 +51,7 @@
     display: flex;
     column-gap: 50px;
     width: 460px;
-    padding: 12px 0 10px 0;
+    padding: 15px 0 10px 0;
     margin: 0 auto;
     overflow-x: scroll;
 
@@ -73,9 +73,12 @@
         background-color: $primary-color;
       }
 
+      &:hover,
+      &.active,
       &:hover .underline,
       &.active .underline {
         transition: all 0.1s linear;
+        transform: scale(1.1);
         width: 100%;
       }
     }
