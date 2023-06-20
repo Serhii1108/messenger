@@ -11,12 +11,14 @@
   &:hover {
     transition: all 0.03s linear;
     background-color: rgba(217, 217, 217, 0.2);
+    transform: scale(1.01);
   }
 
   &.active {
     background-color: rgba(217, 217, 217, 0.2);
     border-radius: 0 10px 10px 0;
     border-left: 3px solid $primary-color;
+    transform: scale(1.01);
   }
 
   &__icon {
