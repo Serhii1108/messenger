@@ -59,9 +59,19 @@
     }
 
     .icons {
-      margin-top: 10px;
-      img {
+      margin-top: 5px;
+
+      .pin-img {
         width: 15px;
+        padding: 5px;
+        border-radius: 30px;
+
+        &:hover {
+          background-color: #ffffff45;
+        }
+        &.active {
+          background-color: #ffffff30;
+        }
       }
     }
   }
