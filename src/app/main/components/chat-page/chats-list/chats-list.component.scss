@@ -74,11 +74,14 @@
       }
 
       &:hover,
-      &.active,
+      &.active {
+        transition: all 0.1s linear;
+        transform: scale(1.1);
+      }
+
       &:hover .underline,
       &.active .underline {
         transition: all 0.1s linear;
-        transform: scale(1.1);
         width: 100%;
       }
     }
