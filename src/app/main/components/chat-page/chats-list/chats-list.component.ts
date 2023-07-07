@@ -1,4 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
+import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+
+import { ApiService } from 'src/app/core/services/api.service';
+import { BasicResponseModel } from 'src/app/auth/models/user.model';
+import { DEBOUNCE_TIME } from '../constance';
 
 @Component({
   selector: 'app-chats-list',
@@ -7,8 +12,14 @@ import { Component, AfterViewInit } from '@angular/core';
 })
 export class ChatsListComponent implements AfterViewInit {
   public searchValue: string = '';
+  public searchValueUpdate: Subject<string> = new Subject<string>();
+  public searchedUsers: BasicResponseModel[] = [];
   public groups: [] = [];
   public contacts: [] = [];
+
+  public constructor(private apiService: ApiService) {
+    this.searchUsers();
+  }
 
   public ngAfterViewInit(): void {
     this.addGroupsEventListeners();
@@ -43,5 +54,34 @@ export class ChatsListComponent implements AfterViewInit {
         pinBtn.classList.toggle('active');
       });
     });
+  }
+
+  private searchUsers(): void {
+    this.searchValueUpdate
+      .pipe(
+        map((value: string) => (value.length ? value : '')),
+        debounceTime(DEBOUNCE_TIME),
+        distinctUntilChanged()
+      )
+      .subscribe((value: string) => {
+        if (value) {
+          this.apiService
+            .getAllUsersByLogin(value)
+            .subscribe((users: BasicResponseModel[]) => {
+              this.searchedUsers = users.filter((user: BasicResponseModel) => {
+                return (
+                  user.login !==
+                  (
+                    JSON.parse(
+                      localStorage.getItem('user') ?? ''
+                    ) as BasicResponseModel
+                  ).login
+                );
+              });
+            });
+        } else {
+          this.searchedUsers = [];
+        }
+      });
   }
 }

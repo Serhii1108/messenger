@@ -78,7 +78,7 @@ export class AuthInterceptor implements HttpInterceptor {
           });
       } catch (err: unknown) {
         this.isRefreshing = false;
-        localStorage.removeItem('tokens');
+        this.authService.logout();
         this.router.navigateByUrl('/auth/login');
       }
     }

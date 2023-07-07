@@ -77,6 +77,10 @@ button::first-letter {
   max-width: 580px;
 }
 
+.highlighted-text {
+  background-color: $primary-color;
+}
+
 // Form
 .mat-focused .mat-form-field-label {
   color: $chat-color !important;

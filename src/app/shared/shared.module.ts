@@ -15,9 +15,10 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
+import { HighlighterPipe } from './pipes/highlighter.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [HighlighterPipe],
   imports: [CommonModule],
   exports: [
     FormsModule,
@@ -36,6 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatSelectModule,
     MatTooltipModule,
     TranslateModule,
+    HighlighterPipe,
   ],
 })
 export class SharedModule {}

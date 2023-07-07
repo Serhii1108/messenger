@@ -9,6 +9,7 @@
         matInput
         type="text"
         [(ngModel)]="searchValue"
+        (ngModelChange)="this.searchValueUpdate.next($event)"
         placeholder="Search"
       />
       <button
@@ -21,6 +22,23 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
+
+    <div class="searched-contacts" *ngIf="searchValue.length > 1">
+      <div
+        class="searched-contacts__contact"
+        *ngFor="let user of searchedUsers"
+      >
+        <img
+          class="icon"
+          src="https://placehold.co/200x200"
+          alt="Contact icon"
+        />
+        <p class="name" [innerHtml]="user.login | highlighter: searchValue"></p>
+      </div>
+      <p class="empty-users-info" *ngIf="!searchedUsers.length">
+        No user found
+      </p>
+    </div>
   </div>
 
   <div class="chats-list__groups">

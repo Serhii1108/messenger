@@ -42,6 +42,14 @@ export class ApiService {
     );
   }
 
+  public getAllUsersByLogin(
+    userLogin: string
+  ): Observable<BasicResponseModel[]> {
+    return this.httpClient.get<BasicResponseModel[]>(
+      `api/users/logins/${userLogin}`
+    );
+  }
+
   public updateUser(
     userId: string,
     userData: UpdateUserModel
