@@ -1,3 +1,10 @@
+export interface User {
+  id: string;
+  login: string;
+  phoneNumber: string;
+  createdAt: Date;
+}
+
 export interface LoginUserModel {
   login: string;
   password: string;

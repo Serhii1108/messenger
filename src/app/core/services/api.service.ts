@@ -11,6 +11,7 @@ import {
   UpdateUserModel,
   UpdateUserPasswordModel,
 } from 'src/app/auth/models/user.model';
+import { Chat } from 'src/app/main/models/chat.model';
 
 @Injectable({
   providedIn: 'root',
@@ -72,5 +73,9 @@ export class ApiService {
 
   public deleteUser(userId: string): void {
     this.httpClient.delete(`api/users/${userId}`).subscribe();
+  }
+
+  public getAllUserChats(userId: string): Observable<Chat[]> {
+    return this.httpClient.get<Chat[]>(`api/chat/all/${userId}`);
   }
 }

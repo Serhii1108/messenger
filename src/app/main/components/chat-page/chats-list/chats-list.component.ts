@@ -1,29 +1,38 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, OnInit } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
 
 import { ApiService } from 'src/app/core/services/api.service';
-import { BasicResponseModel } from 'src/app/auth/models/user.model';
+import { BasicResponseModel, User } from 'src/app/auth/models/user.model';
 import { DEBOUNCE_TIME } from '../constance';
+import { Chat, Message, MessageInfo } from 'src/app/main/models/chat.model';
 
 @Component({
   selector: 'app-chats-list',
   templateUrl: './chats-list.component.html',
   styleUrls: ['./chats-list.component.scss'],
 })
-export class ChatsListComponent implements AfterViewInit {
+export class ChatsListComponent implements AfterViewInit, OnInit {
   public searchValue: string = '';
   public searchValueUpdate: Subject<string> = new Subject<string>();
   public searchedUsers: BasicResponseModel[] = [];
   public groups: [] = [];
-  public contacts: [] = [];
+  public chats: Chat[] = [];
+  public contacts: Array<{ user: User; messageInfo: MessageInfo }> = [];
+  public messageInfo: MessageInfo | undefined = undefined;
 
-  public constructor(private apiService: ApiService) {
+  public constructor(private apiService: ApiService) {}
+
+  private get getUser(): BasicResponseModel {
+    return JSON.parse(localStorage.getItem('user') ?? '') as BasicResponseModel;
+  }
+
+  public ngOnInit(): void {
+    this.getAllUserChats();
     this.searchUsers();
   }
 
   public ngAfterViewInit(): void {
     this.addGroupsEventListeners();
-    this.addContactsEventListeners();
   }
 
   private addGroupsEventListeners(): void {
@@ -33,25 +42,6 @@ export class ChatsListComponent implements AfterViewInit {
       group.addEventListener('click', () => {
         document.querySelector('.group.active')?.classList.remove('active');
         group.classList.add('active');
-      });
-    });
-  }
-
-  private addContactsEventListeners(): void {
-    const contacts: NodeListOf<Element> = document.querySelectorAll('.contact');
-
-    contacts.forEach((contact: Element) => {
-      contact.addEventListener('click', (e: Event) => {
-        if (e.target == pinBtn) {
-          return;
-        }
-        document.querySelector('.contact.active')?.classList.remove('active');
-        contact.classList.add('active');
-      });
-
-      const pinBtn: Element | null = contact.querySelector('.pin-img');
-      pinBtn?.addEventListener('click', () => {
-        pinBtn.classList.toggle('active');
       });
     });
   }
@@ -69,19 +59,37 @@ export class ChatsListComponent implements AfterViewInit {
             .getAllUsersByLogin(value)
             .subscribe((users: BasicResponseModel[]) => {
               this.searchedUsers = users.filter((user: BasicResponseModel) => {
-                return (
-                  user.login !==
-                  (
-                    JSON.parse(
-                      localStorage.getItem('user') ?? ''
-                    ) as BasicResponseModel
-                  ).login
-                );
+                return user.login !== this.getUser.login;
               });
             });
         } else {
           this.searchedUsers = [];
         }
       });
+  }
+
+  private getAllUserChats(): void {
+    this.apiService
+      .getAllUserChats(this.getUser.id)
+      .subscribe((chats: Chat[]) => {
+        this.chats = chats;
+        chats.forEach((chat: Chat) => {
+          this.parseContact(chat);
+        });
+      });
+  }
+
+  private parseContact(chat: Chat): void {
+    const user: User =
+      chat.user1.id == this.getUser.id ? chat.user2 : chat.user1;
+
+    const lastMessage: Message =
+      chat.conversation[chat.conversation.length - 1];
+
+    const messageInfo: MessageInfo = {
+      lastMessage: lastMessage?.message,
+      lastMessageTime: lastMessage?.sendDate,
+    };
+    this.contacts.push({ user, messageInfo });
   }
 }

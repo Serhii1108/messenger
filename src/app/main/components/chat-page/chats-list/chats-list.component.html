@@ -54,6 +54,11 @@
   </div>
 
   <div class="chats-list__contacts">
-    <app-chat-contact *ngFor="let i of contacts"></app-chat-contact>
+    <app-chat-contact
+      *ngFor="let contact of contacts"
+      [contact]="contact.user"
+      [messageInfo]="contact.messageInfo"
+    >
+    </app-chat-contact>
   </div>
 </section>
