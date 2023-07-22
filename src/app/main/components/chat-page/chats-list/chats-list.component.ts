@@ -15,10 +15,11 @@ export class ChatsListComponent implements OnInit {
   public searchValue: string = '';
   public searchValueUpdate: Subject<string> = new Subject<string>();
   public searchedUsers: BasicResponseModel[] = [];
+
   public groups: [] = [];
+
   public chats: Chat[] = [];
   public contacts: Array<{ user: User; messageInfo: MessageInfo }> = [];
-  public messageInfo: MessageInfo | undefined = undefined;
 
   public constructor(private apiService: ApiService) {}
 
@@ -60,7 +61,11 @@ export class ChatsListComponent implements OnInit {
             .getAllUsersByLogin(value)
             .subscribe((users: BasicResponseModel[]) => {
               this.searchedUsers = users.filter((user: BasicResponseModel) => {
-                return user.login !== this.getUser.login;
+                const isContactAdded: Element | null = document.getElementById(
+                  user.id
+                );
+
+                return !isContactAdded && user.login !== this.getUser.login;
               });
             });
         } else {
