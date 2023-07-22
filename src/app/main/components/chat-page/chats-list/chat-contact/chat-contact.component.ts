@@ -13,23 +13,20 @@ export class ChatContactComponent implements AfterViewInit {
   public ngAfterViewInit(): void {
     this.addContactEventListeners();
   }
-
+  public toggleActivePin(event: Event): void {
+    (event.target as Element).classList.toggle('active');
+  }
   private addContactEventListeners(): void {
     const contact: Element | null = document.getElementById(
       `${this.contact?.id}`
     );
     if (contact) {
       contact.addEventListener('click', (e: Event) => {
-        if (e.target == pinBtn) {
-          return;
-        }
+        const pinBtn: Element | null = contact.querySelector('.pin-img');
+        if (e.target == pinBtn) return;
+
         document.querySelector('.contact.active')?.classList.remove('active');
         contact.classList.add('active');
-      });
-
-      const pinBtn: Element | null = contact.querySelector('.pin-img');
-      pinBtn?.addEventListener('click', () => {
-        pinBtn.classList.toggle('active');
       });
     }
   }

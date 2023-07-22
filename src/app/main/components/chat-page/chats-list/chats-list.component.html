@@ -46,6 +46,7 @@
     <div
       class="group"
       *ngFor="let i of groups"
+      (click)="toggleGroupClass($event)"
       matBadge=""
       matBadgeOverlap="false"
     >

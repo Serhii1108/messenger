@@ -12,6 +12,7 @@
     <p class="last-message-time">{{ messageInfo?.lastMessageTime }}</p>
     <div class="icons">
       <img
+        (click)="toggleActivePin($event)"
         class="pin-img"
         src="../../../../../../assets/icons/pin.svg"
         alt="pin"

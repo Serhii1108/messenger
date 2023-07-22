@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
 
 import { ApiService } from 'src/app/core/services/api.service';
@@ -11,7 +11,7 @@ import { Chat, Message, MessageInfo } from 'src/app/main/models/chat.model';
   templateUrl: './chats-list.component.html',
   styleUrls: ['./chats-list.component.scss'],
 })
-export class ChatsListComponent implements AfterViewInit, OnInit {
+export class ChatsListComponent implements OnInit {
   public searchValue: string = '';
   public searchValueUpdate: Subject<string> = new Subject<string>();
   public searchedUsers: BasicResponseModel[] = [];
@@ -31,10 +31,6 @@ export class ChatsListComponent implements AfterViewInit, OnInit {
     this.searchUsers();
   }
 
-  public ngAfterViewInit(): void {
-    this.addGroupsEventListeners();
-  }
-
   public addContact(contactId: string): void {
     this.apiService
       .createChat({
@@ -46,15 +42,9 @@ export class ChatsListComponent implements AfterViewInit, OnInit {
       });
   }
 
-  private addGroupsEventListeners(): void {
-    const groups: NodeListOf<Element> = document.querySelectorAll('.group');
-
-    groups.forEach((group: Element) => {
-      group.addEventListener('click', () => {
-        document.querySelector('.group.active')?.classList.remove('active');
-        group.classList.add('active');
-      });
-    });
+  public toggleGroupClass(event: Event): void {
+    document.querySelector('.group.active')?.classList.remove('active');
+    (event.target as Element).classList.add('active');
   }
 
   private searchUsers(): void {
