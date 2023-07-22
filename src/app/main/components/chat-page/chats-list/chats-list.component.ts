@@ -35,6 +35,17 @@ export class ChatsListComponent implements AfterViewInit, OnInit {
     this.addGroupsEventListeners();
   }
 
+  public addContact(contactId: string): void {
+    this.apiService
+      .createChat({
+        user1Id: this.getUser.id,
+        user2Id: contactId,
+      })
+      .subscribe((chat: Chat) => {
+        this.parseContact(chat);
+      });
+  }
+
   private addGroupsEventListeners(): void {
     const groups: NodeListOf<Element> = document.querySelectorAll('.group');
 

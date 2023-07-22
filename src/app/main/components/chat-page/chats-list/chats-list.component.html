@@ -27,6 +27,7 @@
       <div
         class="searched-contacts__contact"
         *ngFor="let user of searchedUsers"
+        (click)="addContact(user.id)"
       >
         <img
           class="icon"

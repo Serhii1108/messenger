@@ -20,3 +20,8 @@ export interface MessageInfo {
   lastMessage: string;
   lastMessageTime: string;
 }
+
+export interface CreateChatModel {
+  user1Id: string;
+  user2Id: string;
+}
