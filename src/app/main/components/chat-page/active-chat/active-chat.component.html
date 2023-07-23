@@ -1,0 +1,45 @@
+<section class="active-chat">
+  <div class="active-chat__header">
+    <div class="info">
+      <img
+        class="info__icon"
+        src="https://placehold.co/200x200"
+        alt="Contact icon"
+      />
+      <h3 class="info__name"></h3>
+    </div>
+
+    <div class="buttons">
+      <button mat-icon-button class="search-btn" color="accent">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-icon-button class="more-btn" color="accent">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <main class="active-chat__content">
+    <div class="messages-container">
+      <div class="messages">
+        <app-message></app-message>
+      </div>
+    </div>
+    <mat-form-field class="send-field">
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="valueToSend"
+        placeholder="Write something..."
+      />
+      <button
+        *ngIf="valueToSend.trim().length"
+        matSuffix
+        mat-icon-button
+        aria-label="Send"
+      >
+        <mat-icon>send</mat-icon>
+      </button>
+    </mat-form-field>
+  </main>
+</section>

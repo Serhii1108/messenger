@@ -1,0 +1,39 @@
+@import '/src/constance';
+
+.message {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  column-gap: 10px;
+  padding-bottom: 15px;
+  transform: translateX(-50px);
+
+  &__icon {
+    width: 40px;
+    transform: translateY(35%);
+    img {
+      border-radius: 50%;
+      width: inherit;
+    }
+  }
+
+  &__content {
+    position: relative;
+    margin: 0;
+    padding: 10px 15px;
+    max-width: 60%;
+    line-height: 2.2rem;
+    line-break: strict;
+    background-color: $secondary-color;
+    border-radius: 20px 20px 20px 0;
+  }
+
+  &.my-message {
+    flex-direction: row-reverse;
+    transform: translateX(50px);
+
+    .message__content {
+      border-radius: 20px 20px 0 20px;
+    }
+  }
+}
