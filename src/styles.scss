@@ -82,10 +82,58 @@ button::first-letter {
 }
 
 // Form
-.mat-focused .mat-form-field-label {
-  color: $chat-color !important;
+.mat-mdc-text-field-wrapper {
+  background-color: transparent !important;
+  .mat-mdc-form-field-focus-overlay {
+    background-color: transparent;
+  }
+}
+.mdc-text-field,
+.mdc-text-field--no-label {
+  .mat-mdc-form-field-infix {
+    padding: 5px 0 !important;
+    min-height: 50px !important;
+    display: flex !important;
+    align-items: end !important;
+    font-family: $secondary-font !important;
+  }
+  .mdc-floating-label {
+    transform: translateY(-10%) !important;
+
+    &--float-above {
+      transform: translateY(-130%) scale(0.75) !important;
+    }
+  }
 }
 
-.mat-form-field-ripple {
-  background-color: $chat-color !important;
+.mdc-text-field {
+  padding: 5px !important;
+
+  &__input {
+    caret-color: $chat-color !important;
+  }
+
+  &--filled .mdc-line-ripple::after {
+    border-bottom-color: $chat-color !important;
+  }
+
+  &--invalid {
+    .mdc-floating-label {
+      color: $primary-color !important;
+    }
+    .mdc-line-ripple::before,
+    .mdc-line-ripple::after {
+      border-bottom-color: $primary-color !important;
+    }
+  }
+
+  &--focused {
+    .mdc-floating-label {
+      color: $chat-color !important;
+    }
+    .mdc-line-ripple::before,
+    .mdc-line-ripple::after {
+      border-bottom-color: $chat-color !important;
+    }
+  }
 }

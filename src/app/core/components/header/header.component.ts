@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public defaultLanguage: string = 'ua';
+  public defaultLanguage = 'ua';
 
   public constructor(private translate: TranslateService) {
     const browserLang: string | undefined = this.translate.getBrowserLang();

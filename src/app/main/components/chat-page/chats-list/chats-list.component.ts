@@ -12,7 +12,7 @@ import { Chat, Message, MessageInfo } from 'src/app/main/models/chat.model';
   styleUrls: ['./chats-list.component.scss'],
 })
 export class ChatsListComponent implements OnInit {
-  public searchValue: string = '';
+  public searchValue = '';
   public searchValueUpdate: Subject<string> = new Subject<string>();
   public searchedUsers: BasicResponseModel[] = [];
 

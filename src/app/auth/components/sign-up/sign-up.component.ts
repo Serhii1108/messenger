@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import {
   AbstractControl,
-  FormControl,
-  FormGroup,
+  UntypedFormControl,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 
@@ -25,10 +25,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent {
-  public signUpForm: FormGroup = new FormGroup({
-    loginInput: new FormControl('', Validators.minLength(lengthValidation)),
-    passwordInput: new FormControl('', Validators.pattern(passwordValidation)),
-    phoneInput: new FormControl('', Validators.pattern(phoneValidation)),
+  public signUpForm: UntypedFormGroup = new UntypedFormGroup({
+    loginInput: new UntypedFormControl(
+      '',
+      Validators.minLength(lengthValidation)
+    ),
+    passwordInput: new UntypedFormControl(
+      '',
+      Validators.pattern(passwordValidation)
+    ),
+    phoneInput: new UntypedFormControl('', Validators.pattern(phoneValidation)),
   });
 
   public constructor(

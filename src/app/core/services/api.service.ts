@@ -17,7 +17,10 @@ import { Chat, CreateChatModel } from 'src/app/main/models/chat.model';
   providedIn: 'root',
 })
 export class ApiService {
-  public constructor(private httpClient: HttpClient, private router: Router) {}
+  public constructor(
+    private httpClient: HttpClient,
+    private router: Router
+  ) {}
 
   public login(userData: LoginUserModel): Observable<LoginResponseModel> {
     return this.httpClient.post<LoginResponseModel>('auth/login', userData);

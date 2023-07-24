@@ -7,13 +7,11 @@ import { PageNotFoundComponent } from './core/components/page-not-found/page-not
 const routes: Routes = [
   {
     path: '',
-    loadChildren: async () =>
-      import('./main/main.module').then((m) => m.MainModule),
+    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
   },
   {
     path: 'auth',
-    loadChildren: async () =>
-      import('./auth/auth.module').then((m) => m.AuthModule),
+    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {
     path: '**',

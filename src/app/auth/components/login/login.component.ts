@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  UntypedFormGroup,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 
 import { lengthValidation, passwordValidation } from '../../constance';
 import {
@@ -16,9 +20,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  public loginForm: FormGroup = new FormGroup({
-    loginInput: new FormControl('', Validators.minLength(lengthValidation)),
-    passwordInput: new FormControl('', Validators.pattern(passwordValidation)),
+  public loginForm: UntypedFormGroup = new UntypedFormGroup({
+    loginInput: new UntypedFormControl(
+      '',
+      Validators.minLength(lengthValidation)
+    ),
+    passwordInput: new UntypedFormControl(
+      '',
+      Validators.pattern(passwordValidation)
+    ),
   });
 
   public constructor(

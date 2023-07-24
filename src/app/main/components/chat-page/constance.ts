@@ -1,1 +1,1 @@
-export const DEBOUNCE_TIME: number = 300;
+export const DEBOUNCE_TIME = 300;

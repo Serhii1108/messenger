@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./active-chat.component.scss'],
 })
 export class ActiveChatComponent {
-  public valueToSend: string = '';
+  public valueToSend = '';
 }
