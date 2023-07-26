@@ -9,6 +9,7 @@ import { ChatsListComponent } from './components/chat-page/chats-list/chats-list
 import { ChatContactComponent } from './components/chat-page/chats-list/chat-contact/chat-contact.component';
 import { ActiveChatComponent } from './components/chat-page/active-chat/active-chat.component';
 import { MessageComponent } from './components/chat-page/active-chat/message/message.component';
+import { ChatService } from './services/chat.service';
 
 @NgModule({
   declarations: [
@@ -21,5 +22,6 @@ import { MessageComponent } from './components/chat-page/active-chat/message/mes
   ],
   imports: [CommonModule, SharedModule, MainRoutingModule],
   exports: [MainPageComponent],
+  providers: [ChatService],
 })
 export class MainModule {}

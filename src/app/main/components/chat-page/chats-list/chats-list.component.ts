@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
 
-import { ApiService } from 'src/app/core/services/api.service';
+import { ChatService } from 'src/app/main/services/chat.service';
 import { BasicResponseModel, User } from 'src/app/auth/models/user.model';
 import { DEBOUNCE_TIME } from '../constance';
 import { Chat, Message, MessageInfo } from 'src/app/main/models/chat.model';
@@ -21,11 +21,7 @@ export class ChatsListComponent implements OnInit {
   public chats: Chat[] = [];
   public contacts: Array<{ user: User; messageInfo: MessageInfo }> = [];
 
-  public constructor(private apiService: ApiService) {}
-
-  private get getUser(): BasicResponseModel {
-    return JSON.parse(localStorage.getItem('user') ?? '') as BasicResponseModel;
-  }
+  public constructor(private chatService: ChatService) {}
 
   public ngOnInit(): void {
     this.getAllUserChats();
@@ -33,14 +29,9 @@ export class ChatsListComponent implements OnInit {
   }
 
   public addContact(contactId: string): void {
-    this.apiService
-      .createChat({
-        user1Id: this.getUser.id,
-        user2Id: contactId,
-      })
-      .subscribe((chat: Chat) => {
-        this.parseContact(chat);
-      });
+    this.chatService.createChat(contactId).subscribe((chat: Chat) => {
+      this.parseContact(chat);
+    });
   }
 
   public toggleGroupClass(event: Event): void {
@@ -57,7 +48,7 @@ export class ChatsListComponent implements OnInit {
       )
       .subscribe((value: string) => {
         if (value) {
-          this.apiService
+          this.chatService
             .getAllUsersByLogin(value)
             .subscribe((users: BasicResponseModel[]) => {
               this.searchedUsers = users.filter((user: BasicResponseModel) => {
@@ -65,7 +56,10 @@ export class ChatsListComponent implements OnInit {
                   user.id
                 );
 
-                return !isContactAdded && user.login !== this.getUser.login;
+                return (
+                  !isContactAdded &&
+                  user.login !== this.chatService.getCurrUser.login
+                );
               });
             });
         } else {
@@ -75,8 +69,8 @@ export class ChatsListComponent implements OnInit {
   }
 
   private getAllUserChats(): void {
-    this.apiService
-      .getAllUserChats(this.getUser.id)
+    this.chatService
+      .getAllUserChats(this.chatService.getCurrUser.id)
       .subscribe((chats: Chat[]) => {
         this.chats = chats;
         chats.forEach((chat: Chat) => {
@@ -87,7 +81,9 @@ export class ChatsListComponent implements OnInit {
 
   private parseContact(chat: Chat): void {
     const user: User =
-      chat.user1.id == this.getUser.id ? chat.user2 : chat.user1;
+      chat.user1.id == this.chatService.getCurrUser.id
+        ? chat.user2
+        : chat.user1;
 
     const lastMessage: Message =
       chat.conversation[chat.conversation.length - 1];

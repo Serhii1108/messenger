@@ -17,7 +17,7 @@ export class AuthService {
 
   public get isUserAuthorized(): boolean {
     const tokens: LoginResponseModel | null = this.getTokens();
-    const user: BasicResponseModel | null = this.getUser();
+    const user: BasicResponseModel | null = this.getCurrUser();
 
     if (!tokens || !user) {
       return false;
@@ -46,7 +46,7 @@ export class AuthService {
     return tokens ? JSON.parse(tokens) : null;
   }
 
-  public getUser(): BasicResponseModel | null {
+  public getCurrUser(): BasicResponseModel {
     const user: string | null = localStorage.getItem('user');
     return user ? JSON.parse(user) : null;
   }
