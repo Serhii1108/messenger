@@ -6,7 +6,9 @@
   ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
         "project": [
           "tsconfig.json"
@@ -40,15 +42,22 @@
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "plugin:prettier/recommended"],
-      "rules": {"prettier/prettier": [
-        "error",
-        {
-          "parser": "angular",
-          "endOfLine": "auto"
-        }
-      ]}
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "plugin:prettier/recommended"
+      ],
+      "rules": {
+        "prettier/prettier": [
+          "error",
+          {
+            "parser": "angular",
+            "endOfLine": "auto"
+          }
+        ]
+      }
     },
     {
       "files": [
@@ -65,6 +74,14 @@
       ],
       "extends": [
         "plugin:ngrx/recommended"
+      ]
+    },
+    {
+      "files": [
+        "*.ts"
+      ],
+      "extends": [
+        "plugin:@ngrx/recommended-requiring-type-checking"
       ]
     }
   ]

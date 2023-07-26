@@ -1,10 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, debounceTime, distinctUntilChanged, map } from 'rxjs';
+import {
+  Observable,
+  Subject,
+  debounceTime,
+  distinctUntilChanged,
+  map,
+} from 'rxjs';
+import { Store } from '@ngrx/store';
 
 import { ChatService } from 'src/app/main/services/chat.service';
 import { BasicResponseModel, User } from 'src/app/auth/models/user.model';
 import { DEBOUNCE_TIME } from '../constance';
-import { Chat, Message, MessageInfo } from 'src/app/main/models/chat.model';
+import {
+  Chat,
+  Contact,
+  Message,
+  MessageInfo,
+} from 'src/app/main/models/chat.model';
+import { chatSelectors, chatActions } from 'src/app/store';
 
 @Component({
   selector: 'app-chats-list',
@@ -18,20 +31,27 @@ export class ChatsListComponent implements OnInit {
 
   public groups: [] = [];
 
-  public chats: Chat[] = [];
-  public contacts: Array<{ user: User; messageInfo: MessageInfo }> = [];
+  public chats$: Observable<Chat[]> = this.store.select(
+    chatSelectors.selectAllChats
+  );
+  public contacts: Contact[] = [];
 
-  public constructor(private chatService: ChatService) {}
+  public constructor(
+    private chatService: ChatService,
+    private store: Store
+  ) {}
 
   public ngOnInit(): void {
     this.getAllUserChats();
+    this.parseContacts();
     this.searchUsers();
   }
 
   public addContact(contactId: string): void {
-    this.chatService.createChat(contactId).subscribe((chat: Chat) => {
-      this.parseContact(chat);
-    });
+    this.searchValue = '';
+    this.searchedUsers = [];
+    this.searchValueUpdate.next('');
+    this.store.dispatch(chatActions.createChat({ contactId }));
   }
 
   public toggleGroupClass(event: Event): void {
@@ -68,18 +88,24 @@ export class ChatsListComponent implements OnInit {
       });
   }
 
-  private getAllUserChats(): void {
-    this.chatService
-      .getAllUserChats(this.chatService.getCurrUser.id)
-      .subscribe((chats: Chat[]) => {
-        this.chats = chats;
-        chats.forEach((chat: Chat) => {
-          this.parseContact(chat);
-        });
-      });
+  private getAllUserChats() {
+    this.store.dispatch(
+      chatActions.getChats({ currUserId: this.chatService.getCurrUser.id })
+    );
   }
 
-  private parseContact(chat: Chat): void {
+  private parseContacts(): void {
+    let contactsAmount = 0;
+    this.chats$.subscribe((chats: Chat[]) => {
+      for (let i = contactsAmount; i < chats.length; i++) {
+        const contact: Contact = this.createContact(chats[i]);
+        this.contacts.push(contact);
+        contactsAmount++;
+      }
+    });
+  }
+
+  private createContact(chat: Chat): Contact {
     const user: User =
       chat.user1.id == this.chatService.getCurrUser.id
         ? chat.user2
@@ -92,6 +118,8 @@ export class ChatsListComponent implements OnInit {
       lastMessage: lastMessage?.message,
       lastMessageTime: lastMessage?.sendDate,
     };
-    this.contacts.push({ user, messageInfo });
+
+    const contact = { user, messageInfo };
+    return contact;
   }
 }

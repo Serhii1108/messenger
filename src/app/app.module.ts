@@ -1,4 +1,8 @@
 import { NgModule } from '@angular/core';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
@@ -13,6 +17,7 @@ import { AppComponent } from './app.component';
 import { ApiService } from './core/services/api.service';
 import { ApiInterceptor } from './core/interceptors/api.interceptor';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
+import { ChatEffects } from './store/effects/chat.effects';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -34,6 +39,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
+    StoreModule.forRoot(),
+    StoreRouterConnectingModule.forRoot({ stateKey: 'router' }),
+    StoreDevtoolsModule.instrument(),
+    EffectsModule.forRoot([ChatEffects]),
   ],
   providers: [
     ApiService,

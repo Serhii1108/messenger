@@ -2,7 +2,7 @@ export interface User {
   id: string;
   login: string;
   phoneNumber: string;
-  createdAt: Date;
+  createdAt: string;
 }
 
 export interface LoginUserModel {

@@ -25,3 +25,8 @@ export interface CreateChatModel {
   user1Id: string;
   user2Id: string;
 }
+
+export interface Contact {
+  user: User;
+  messageInfo: MessageInfo;
+}
