@@ -9,14 +9,9 @@ import {
 import { Store } from '@ngrx/store';
 
 import { ChatService } from 'src/app/main/services/chat.service';
-import { BasicResponseModel, User } from 'src/app/auth/models/user.model';
+import { BasicResponseModel } from 'src/app/auth/models/user.model';
 import { DEBOUNCE_TIME } from '../constance';
-import {
-  Chat,
-  Contact,
-  Message,
-  MessageInfo,
-} from 'src/app/main/models/chat.model';
+import { Chat } from 'src/app/main/models/chat.model';
 import { chatSelectors, chatActions } from 'src/app/store';
 
 @Component({
@@ -34,7 +29,6 @@ export class ChatsListComponent implements OnInit {
   public chats$: Observable<Chat[]> = this.store.select(
     chatSelectors.selectAllChats
   );
-  public contacts: Contact[] = [];
 
   public constructor(
     private chatService: ChatService,
@@ -43,7 +37,6 @@ export class ChatsListComponent implements OnInit {
 
   public ngOnInit(): void {
     this.getAllUserChats();
-    this.parseContacts();
     this.searchUsers();
   }
 
@@ -92,34 +85,5 @@ export class ChatsListComponent implements OnInit {
     this.store.dispatch(
       chatActions.getChats({ currUserId: this.chatService.getCurrUser.id })
     );
-  }
-
-  private parseContacts(): void {
-    let contactsAmount = 0;
-    this.chats$.subscribe((chats: Chat[]) => {
-      for (let i = contactsAmount; i < chats.length; i++) {
-        const contact: Contact = this.createContact(chats[i]);
-        this.contacts.push(contact);
-        contactsAmount++;
-      }
-    });
-  }
-
-  private createContact(chat: Chat): Contact {
-    const user: User =
-      chat.user1.id == this.chatService.getCurrUser.id
-        ? chat.user2
-        : chat.user1;
-
-    const lastMessage: Message =
-      chat.conversation[chat.conversation.length - 1];
-
-    const messageInfo: MessageInfo = {
-      lastMessage: lastMessage?.message,
-      lastMessageTime: lastMessage?.sendDate,
-    };
-
-    const contact = { user, messageInfo };
-    return contact;
   }
 }
