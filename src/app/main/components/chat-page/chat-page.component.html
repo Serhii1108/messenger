@@ -1,4 +1,8 @@
 <section class="chat-page">
   <app-chats-list></app-chats-list>
-  <app-active-chat style="flex: 1"></app-active-chat>
+  <app-active-chat
+    style="flex: 1"
+    *ngIf="activeChat$ | async"
+    [chat]="activeChat$ | async"
+  ></app-active-chat>
 </section>

@@ -26,3 +26,15 @@ export const createChatSuccess = createAction(
     chat: Chat;
   }>()
 );
+
+export const setActiveChat = createAction(
+  `${prefix} Set Active Chat`,
+  props<{ chat: Chat }>()
+);
+
+export const setActiveChatSuccess = createAction(
+  `${setActiveChat.type} Success`,
+  props<{
+    chat: Chat;
+  }>()
+);

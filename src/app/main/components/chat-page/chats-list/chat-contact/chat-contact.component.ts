@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { User } from 'src/app/auth/models/user.model';
 import {
   Chat,
@@ -8,6 +9,7 @@ import {
   MessageInfo,
 } from 'src/app/main/models/chat.model';
 import { ChatService } from 'src/app/main/services/chat.service';
+import { chatActions } from 'src/app/store';
 @Component({
   selector: 'app-chat-contact',
   templateUrl: './chat-contact.component.html',
@@ -18,7 +20,10 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
 
   public contact: Contact | undefined;
 
-  public constructor(private chatService: ChatService) {}
+  public constructor(
+    private chatService: ChatService,
+    private store: Store
+  ) {}
 
   public ngOnInit(): void {
     this.parseContact();
@@ -33,18 +38,23 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
   }
 
   private addContactEventListeners(): void {
-    const contact: Element | null = document.getElementById(
-      `${this.contact?.contactInfo.id}`
-    );
+    const contact: Element | null = document.getElementById(`${this.chat?.id}`);
     if (contact) {
       contact.addEventListener('click', (e: Event) => {
-        const pinBtn: Element | null = contact.querySelector('.pin-img');
-        if (e.target == pinBtn) return;
-
-        document.querySelector('.contact.active')?.classList.remove('active');
-        contact.classList.add('active');
+        this.toggleActiveContact(contact, e);
+        if (this.chat) {
+          this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
+        }
       });
     }
+  }
+
+  private toggleActiveContact(contact: Element, e: Event) {
+    const pinBtn: Element | null = contact.querySelector('.pin-img');
+    if (e.target == pinBtn) return;
+
+    document.querySelector('.contact.active')?.classList.remove('active');
+    contact.classList.add('active');
   }
 
   private parseContact() {

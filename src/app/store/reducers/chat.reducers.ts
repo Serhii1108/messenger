@@ -15,6 +15,12 @@ const reducer = createReducer(
   }),
   on(chatActions.createChatSuccess, (state, { chat }): ChatState => {
     return { ...state, chats: [...state.chats, chat], isLoading: false };
+  }),
+  on(chatActions.setActiveChat, (state): ChatState => {
+    return { ...state, isLoading: true };
+  }),
+  on(chatActions.setActiveChatSuccess, (state, { chat }): ChatState => {
+    return { ...state, activeChat: chat, isLoading: false };
   })
 );
 

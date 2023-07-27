@@ -4,7 +4,9 @@
   </div>
 
   <div class="contact__title">
-    <h3 class="name">{{ contact?.contactInfo?.login }}</h3>
+    <h3 class="name" id="{{ contact?.contactInfo?.id }}">
+      {{ contact?.contactInfo?.login }}
+    </h3>
     <p class="message">{{ contact?.messageInfo?.lastMessage }}</p>
   </div>
 
