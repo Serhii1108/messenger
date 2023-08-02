@@ -13,7 +13,7 @@ export interface Message {
   message: string;
   messageId: number;
   isSeen: boolean;
-  sendDate: string;
+  sendDate: Date;
 }
 
 export interface MessageInfo {
@@ -34,4 +34,9 @@ export interface Contact {
 export interface ContactInfo {
   id: string;
   login: string;
+}
+
+export interface SendMessageModel {
+  message: Message;
+  chatId: string;
 }

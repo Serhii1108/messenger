@@ -38,4 +38,12 @@ export class ChatEffects {
       map((chat: Chat) => chatActions.setActiveChatSuccess({ chat }))
     );
   });
+
+  updateChat$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(chatActions.updateChat.type),
+      switchMap(({ chat }) => of<Chat>(chat)),
+      map((chat: Chat) => chatActions.updateChatSuccess({ chat }))
+    );
+  });
 }

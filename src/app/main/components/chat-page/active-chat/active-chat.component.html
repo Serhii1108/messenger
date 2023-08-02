@@ -6,7 +6,13 @@
         src="https://placehold.co/200x200"
         alt="Contact icon"
       />
-      <h3 class="info__name"></h3>
+      <h3 class="info__name">
+        {{
+          chat?.user1?.login === chatService.getCurrUser.login
+            ? chat?.user2?.login
+            : chatService.getCurrUser.login
+        }}
+      </h3>
     </div>
 
     <div class="buttons">
@@ -22,21 +28,25 @@
   <main class="active-chat__content">
     <div class="messages-container">
       <div class="messages">
-        <app-message></app-message>
+        <app-message
+          *ngFor="let message of chat?.conversation"
+          [messageItem]="message"
+        ></app-message>
       </div>
     </div>
     <mat-form-field class="send-field">
       <input
         matInput
         type="text"
-        [(ngModel)]="valueToSend"
+        [formControl]="sendFormControl"
         placeholder="Write something..."
       />
       <button
-        *ngIf="valueToSend.trim().length"
+        *ngIf="message.trim().length"
         matSuffix
         mat-icon-button
         aria-label="Send"
+        (click)="sendMessage()"
       >
         <mat-icon>send</mat-icon>
       </button>

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SocketIoConfig, SocketIoModule } from 'ngx-socket-io';
 import { StoreModule } from '@ngrx/store';
 
 import { SharedModule } from '../shared/shared.module';
@@ -12,6 +13,10 @@ import { ActiveChatComponent } from './components/chat-page/active-chat/active-c
 import { MessageComponent } from './components/chat-page/active-chat/message/message.component';
 import { ChatService } from './services/chat.service';
 import { chatReducer } from '../store/reducers/chat.reducers';
+import { environment } from 'src/environments/environment';
+import { ChatSocketService } from './services/chat-socket.service';
+
+const config: SocketIoConfig = { url: environment.apiUrl };
 
 @NgModule({
   declarations: [
@@ -27,8 +32,9 @@ import { chatReducer } from '../store/reducers/chat.reducers';
     SharedModule,
     MainRoutingModule,
     StoreModule.forFeature('chat', chatReducer),
+    SocketIoModule.forRoot(config),
   ],
   exports: [MainPageComponent],
-  providers: [ChatService],
+  providers: [ChatService, ChatSocketService],
 })
 export class MainModule {}
