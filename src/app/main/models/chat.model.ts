@@ -5,6 +5,7 @@ export interface Chat {
   user1: User;
   user2: User;
   conversation: Message[];
+  isOnline: boolean;
   createdAt: Date;
 }
 

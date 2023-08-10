@@ -22,10 +22,22 @@
   }
 
   &__icon {
+    position: relative;
+
     img {
       width: 60px;
       height: 60px;
       border-radius: 50%;
+    }
+
+    .online-status {
+      position: absolute;
+      top: 70%;
+      left: 70%;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background-color: $primary-color;
     }
   }
 

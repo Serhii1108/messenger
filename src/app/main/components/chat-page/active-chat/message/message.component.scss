@@ -3,7 +3,7 @@
 .message {
   display: flex;
   flex-direction: row;
-  align-items: end;
+  align-items: flex-end;
   column-gap: 10px;
   padding-bottom: 15px;
   transform: translateX(-50px);
@@ -23,7 +23,8 @@
     padding: 10px 15px;
     max-width: 60%;
     line-height: 2.2rem;
-    line-break: strict;
+    line-break: normal;
+    word-break: break-all;
     background-color: $secondary-color;
     border-radius: 20px 20px 20px 0;
   }

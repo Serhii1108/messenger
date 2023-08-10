@@ -1,18 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { Chat, Message } from 'src/app/main/models/chat.model';
+import {
+  Chat,
+  Message,
+  SendMessageModel,
+} from 'src/app/main/models/chat.model';
 import { ChatSocketService } from 'src/app/main/services/chat-socket.service';
 import { ChatService } from 'src/app/main/services/chat.service';
-import { chatActions } from 'src/app/store';
 
 @Component({
   selector: 'app-active-chat',
   templateUrl: './active-chat.component.html',
   styleUrls: ['./active-chat.component.scss'],
 })
-export class ActiveChatComponent {
+export class ActiveChatComponent implements AfterViewInit {
   @Input() chat: Chat | undefined | null;
   public sendFormControl: FormControl = new FormControl('');
 
@@ -35,14 +38,22 @@ export class ActiveChatComponent {
         messageId: this.chat?.conversation.length,
         isSeen: false,
       };
-      const updatedChat: Chat = {
-        ...this.chat,
-        conversation: [...this.chat.conversation, message],
+      const sendMessage: SendMessageModel = {
+        chatId: this.chat.id,
+        message,
       };
-
-      this.chatSocketService.sendMessage(message);
-      this.store.dispatch(chatActions.updateChat({ chat: updatedChat }));
+      this.chatSocketService.sendMessage(sendMessage);
       this.sendFormControl.setValue('');
+    }
+  }
+
+  public ngAfterViewInit(): void {
+    const conversation: Element | null = document.querySelector('.messages');
+    if (conversation) {
+      conversation.scrollIntoView({
+        inline: 'end',
+        block: 'end',
+      });
     }
   }
 }

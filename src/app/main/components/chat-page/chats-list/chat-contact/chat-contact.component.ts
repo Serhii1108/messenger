@@ -31,14 +31,19 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
   ) {}
 
   public ngOnInit(): void {
+    this.chatSocketService.connect(this.chat);
     this.parseContact();
+    this.isActive = this.isActiveChat;
   }
 
   public ngAfterViewInit(): void {
-    if (localStorage.getItem('activeChatId') === this.chat?.id) {
-      this.isActive = true;
-      this.setActiveChat();
+    if (this.isActiveChat && this.chat) {
+      this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
     }
+  }
+
+  public get isActiveChat() {
+    return localStorage.getItem('activeChatId') === this.chat?.id;
   }
 
   public get getContact() {
@@ -58,7 +63,6 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
       if (!contact.classList.contains('active') && this.chat) {
         this.toggleActiveContact(contact);
 
-        this.chatSocketService.connect(this.chat);
         this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
       }
     }

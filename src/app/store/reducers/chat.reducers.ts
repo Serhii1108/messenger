@@ -31,7 +31,6 @@ const reducer = createReducer(
       chats: [
         ...state.chats.map((item) => (item.id === chat.id ? chat : item)),
       ],
-      activeChat: chat,
       isLoading: false,
     };
   })

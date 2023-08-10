@@ -16,7 +16,12 @@ import { chatReducer } from '../store/reducers/chat.reducers';
 import { environment } from 'src/environments/environment';
 import { ChatSocketService } from './services/chat-socket.service';
 
-const config: SocketIoConfig = { url: environment.apiUrl };
+const config: SocketIoConfig = {
+  url: environment.apiUrl,
+  options: {
+    autoConnect: false,
+  },
+};
 
 @NgModule({
   declarations: [
