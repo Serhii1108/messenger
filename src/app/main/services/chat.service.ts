@@ -19,6 +19,10 @@ export class ChatService {
     return this.authService.getCurrUser();
   }
 
+  public isActiveChat(chat: Chat | undefined): boolean {
+    return localStorage.getItem('activeChatId') === chat?.id;
+  }
+
   public createChat(contactId: string): Observable<Chat> {
     return this.apiService.createChat({
       user1Id: this.authService.getCurrUser().id,

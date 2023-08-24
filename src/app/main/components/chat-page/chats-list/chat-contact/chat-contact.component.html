@@ -4,7 +4,11 @@
   id="{{ contact?.chatId }}"
   (click)="setActiveChat($event)"
 >
-  <div class="contact__icon">
+  <div
+    class="contact__icon"
+    matBadge="{{ unreadMessageAmount }}"
+    [matBadgeHidden]="unreadMessageAmount === 0"
+  >
     <img src="https://placehold.co/200x200" alt="Contact icon" />
     <div class="online-status" *ngIf="chat?.isOnline"></div>
   </div>
@@ -13,7 +17,9 @@
     <h3 class="name" id="{{ contact?.contactInfo?.id }}">
       {{ contact?.contactInfo?.login }}
     </h3>
-    <p class="message">{{ contact?.messageInfo?.lastMessage }}</p>
+    <p class="message">
+      {{ contact?.messageInfo?.lastMessage }}
+    </p>
   </div>
 
   <div class="contact__info">

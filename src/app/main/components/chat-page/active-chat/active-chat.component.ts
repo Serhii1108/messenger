@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Store } from '@ngrx/store';
 
 import {
   Chat,
@@ -25,9 +24,10 @@ export class ActiveChatComponent implements AfterViewInit {
 
   public constructor(
     private chatSocketService: ChatSocketService,
-    public chatService: ChatService,
-    private store: Store
-  ) {}
+    public chatService: ChatService
+  ) {
+    localStorage.setItem('activeChatMessagesRead', 'false');
+  }
 
   public sendMessage() {
     if (this.message.length && this.chat) {

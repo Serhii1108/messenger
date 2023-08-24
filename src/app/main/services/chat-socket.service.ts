@@ -8,6 +8,7 @@ import {
   CHECK_STATUS_INTERVAL,
   socketEvents,
 } from '../components/chat-page/constance';
+import { ChatService } from './chat.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,11 +17,13 @@ export class ChatSocketService {
   private chats: Chat[] = [];
 
   constructor(
+    private chatService: ChatService,
     private socket: Socket,
     private store: Store
   ) {
     this.handleUpdateChat();
     this.handleOnlineStatus();
+    this.handleMessagesRead();
   }
 
   public connect(chat: Chat | undefined) {
@@ -37,6 +40,34 @@ export class ChatSocketService {
     this.socket.emit(socketEvents.SEND_MESSAGE, { message, chatId });
   }
 
+  public async markMessagesAsRead() {
+    const chat: Chat = this.chats.filter((item) =>
+      this.chatService.isActiveChat(item)
+    )[0];
+
+    await this.socket.emit(socketEvents.MARK_MESSAGES_AS_READ, {
+      roomName: chat.id,
+      userId: this.chatService.getCurrUser.id,
+    });
+  }
+
+  private handleMessagesRead() {
+    this.socket.on(socketEvents.MESSAGES_READ, (payload: { chat: Chat }) => {
+      const chat: Chat = this.chats.filter((item) => {
+        return item.id === payload.chat.id;
+      })[0];
+      this.chats[this.chats.indexOf(chat)] = payload.chat;
+
+      this.store.dispatch(chatActions.updateChat({ chat: payload.chat }));
+
+      if (this.chatService.isActiveChat(payload.chat)) {
+        this.store.dispatch(chatActions.setActiveChat({ chat: payload.chat }));
+      }
+
+      localStorage.setItem('activeChatMessagesRead', 'true');
+    });
+  }
+
   private handleUpdateChat() {
     this.socket.on(socketEvents.SHARE_MESSAGE, (payload: SendMessageModel) => {
       const chat: Chat = this.chats.filter(
@@ -50,10 +81,10 @@ export class ChatSocketService {
         };
         this.store.dispatch(chatActions.updateChat({ chat: updatedChat }));
 
-        const isActiveChat = localStorage.getItem('activeChatId') === chat.id;
-        if (isActiveChat) {
+        if (this.chatService.isActiveChat(chat)) {
           this.store.dispatch(chatActions.setActiveChat({ chat: updatedChat }));
         }
+        localStorage.setItem('activeChatMessagesRead', 'false');
 
         this.chats[this.chats.indexOf(chat)] = updatedChat;
       }

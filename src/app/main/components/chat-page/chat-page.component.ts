@@ -14,6 +14,9 @@ export class ChatPageComponent {
   public activeChat$: Observable<Chat | undefined> = this.store.select(
     chatSelectors.selectActiveChat
   );
+  public isLoading$: Observable<boolean> = this.store.select(
+    chatSelectors.selectIsChatLoading
+  );
 
   public constructor(private store: Store) {}
 }

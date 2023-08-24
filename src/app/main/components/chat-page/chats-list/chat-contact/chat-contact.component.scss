@@ -24,6 +24,18 @@
   &__icon {
     position: relative;
 
+    .mat-badge-content {
+      top: -5px;
+      max-width: 35px;
+      min-width: 23px;
+      width: fit-content;
+      box-sizing: border-box;
+      height: 25px;
+      padding: 0 5px;
+      line-height: 25px;
+      background-color: $primary-color;
+    }
+
     img {
       width: 60px;
       height: 60px;
@@ -53,7 +65,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
-      width: 330px;
+      max-width: 300px;
       margin: 0;
       font-size: 1.5rem;
       opacity: 0.8;
@@ -64,14 +76,27 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: end;
+    align-items: flex-end;
 
     .last-message-time {
       margin: 0;
     }
 
     .icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       margin-top: 5px;
+
+      .unread-messages {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0 5px 0 0;
+        padding: 3px 4px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background-color: $primary-color;
+      }
 
       .pin-img {
         width: 15px;

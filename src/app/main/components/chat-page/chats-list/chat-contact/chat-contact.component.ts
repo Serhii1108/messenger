@@ -23,6 +23,7 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
 
   public contact: Contact | undefined;
   public isActive = false;
+  public unreadMessageAmount = 0;
 
   public constructor(
     private chatService: ChatService,
@@ -33,17 +34,15 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
   public ngOnInit(): void {
     this.chatSocketService.connect(this.chat);
     this.parseContact();
-    this.isActive = this.isActiveChat;
+    this.parseUnreadMessages();
+    this.isActive = this.chatService.isActiveChat(this.chat);
   }
 
   public ngAfterViewInit(): void {
-    if (this.isActiveChat && this.chat) {
+    if (this.isActive && this.chat) {
       this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
+      this.markMessagesAsRead();
     }
-  }
-
-  public get isActiveChat() {
-    return localStorage.getItem('activeChatId') === this.chat?.id;
   }
 
   public get getContact() {
@@ -64,6 +63,9 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
         this.toggleActiveContact(contact);
 
         this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
+
+        localStorage.setItem('activeChatMessagesRead', 'false');
+        this.markMessagesAsRead();
       }
     }
   }
@@ -121,6 +123,51 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
       };
 
       this.contact = contact;
+    }
+  }
+
+  private parseUnreadMessages() {
+    const messages: Message[] | undefined = this.chat?.conversation;
+
+    if (messages) {
+      if (messages[messages.length - 1].isSeen) {
+        this.unreadMessageAmount = 0;
+        return;
+      }
+      if (!this.chatService.isActiveChat(this.chat)) {
+        for (let i = messages.length - 1; i >= 0; i--) {
+          if (messages[i].senderId !== this.chatService.getCurrUser.id) {
+            if (!messages[i].isSeen) {
+              this.unreadMessageAmount += 1;
+            } else {
+              return;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  private markMessagesAsRead() {
+    if (this.chat?.conversation.length) {
+      const messages: Message[] = this.chat.conversation;
+
+      for (let i = messages.length - 1; i >= 0; i--) {
+        const activeChatMessagesStatus: boolean = JSON.parse(
+          localStorage.getItem('activeChatMessagesRead') ?? 'false'
+        );
+        if (
+          messages[i].senderId !== this.chatService.getCurrUser.id &&
+          !activeChatMessagesStatus
+        ) {
+          if (!messages[i].isSeen) {
+            this.chatSocketService.markMessagesAsRead();
+            this.unreadMessageAmount = 0;
+          } else {
+            break;
+          }
+        }
+      }
     }
   }
 }
