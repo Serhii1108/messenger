@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { ApiService } from 'src/app/core/services/api.service';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -10,6 +10,8 @@ import { BasicResponseModel } from 'src/app/auth/models/user.model';
   providedIn: 'root',
 })
 export class ChatService {
+  public pinnedChatsIds$: Subject<string[]> = new Subject<string[]>();
+
   public constructor(
     private apiService: ApiService,
     private authService: AuthService
@@ -17,6 +19,26 @@ export class ChatService {
 
   public get getCurrUser(): BasicResponseModel {
     return this.authService.getCurrUser();
+  }
+
+  public get getPinnedChats(): string[] {
+    return JSON.parse(localStorage.getItem('pinnedChatsId') ?? '[]');
+  }
+
+  public addPinnedChat(chatId: string) {
+    const chatsIds: string[] = this.getPinnedChats;
+    chatsIds.push(chatId);
+
+    localStorage.setItem('pinnedChatsId', JSON.stringify(chatsIds));
+    this.pinnedChatsIds$.next(chatsIds);
+  }
+
+  public removePinnedChat(chatId: string) {
+    const chatsIds: string[] = this.getPinnedChats;
+    const updatedChatsIds = chatsIds.filter((id) => id !== chatId);
+
+    localStorage.setItem('pinnedChatsId', JSON.stringify(updatedChatsIds));
+    this.pinnedChatsIds$.next(updatedChatsIds);
   }
 
   public isActiveChat(chat: Chat | undefined): boolean {

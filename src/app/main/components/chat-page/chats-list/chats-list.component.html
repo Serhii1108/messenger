@@ -56,7 +56,10 @@
   </div>
 
   <div class="chats-list__contacts">
-    <app-chat-contact *ngFor="let chat of chats$ | async" [chat]="chat">
+    <app-chat-contact
+      *ngFor="let chat of chats$ | async | pinnedChatsFilter: pinnedChatsIds"
+      [chat]="chat"
+    >
     </app-chat-contact>
   </div>
 </section>

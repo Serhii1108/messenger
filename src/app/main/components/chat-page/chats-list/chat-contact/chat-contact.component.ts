@@ -43,6 +43,7 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
       this.store.dispatch(chatActions.setActiveChat({ chat: this.chat }));
       this.markMessagesAsRead();
     }
+    this.pinChat();
   }
 
   public get getContact() {
@@ -50,7 +51,16 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
   }
 
   public toggleActivePin(event: Event): void {
-    (event.target as Element).classList.toggle('active');
+    const pinBtn: Element = event.target as Element;
+    pinBtn.classList.toggle('active');
+
+    if (this.chat) {
+      if (pinBtn.classList.contains('active')) {
+        this.chatService.addPinnedChat(this.chat.id);
+      } else {
+        this.chatService.removePinnedChat(this.chat.id);
+      }
+    }
   }
 
   public setActiveChat(e?: Event): void {
@@ -123,6 +133,18 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
       };
 
       this.contact = contact;
+    }
+  }
+
+  private pinChat() {
+    const pinnedChatsIds: string[] = this.chatService.getPinnedChats;
+
+    if (this.chat && pinnedChatsIds.includes(this.chat.id)) {
+      const chat: Element | null = document.getElementById(`${this.chat.id}`);
+      const pinBtn: Element | null | undefined =
+        chat?.querySelector('.pin-img');
+
+      pinBtn?.classList.add('active');
     }
   }
 

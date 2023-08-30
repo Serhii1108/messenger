@@ -29,11 +29,16 @@ export class ChatsListComponent implements OnInit {
   public chats$: Observable<Chat[]> = this.store.select(
     chatSelectors.selectAllChats
   );
+  public pinnedChatsIds: string[] = [];
 
   public constructor(
     private chatService: ChatService,
     private store: Store
-  ) {}
+  ) {
+    this.chatService.pinnedChatsIds$.subscribe((pinnedChatsIds: string[]) => {
+      this.pinnedChatsIds = pinnedChatsIds;
+    });
+  }
 
   public ngOnInit(): void {
     this.getAllUserChats();
