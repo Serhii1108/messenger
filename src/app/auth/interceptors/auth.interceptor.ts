@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse,
 } from '@angular/common/http';
-import { Observable, catchError } from 'rxjs';
+import { Observable, catchError, of } from 'rxjs';
 import { Router } from '@angular/router';
 import { StatusCodes } from 'src/app/shared/constance';
 import { LoginResponseModel } from '../models/user.model';
@@ -65,22 +65,23 @@ export class AuthInterceptor implements HttpInterceptor {
     if (savedTokens?.refreshToken && !this.isRefreshing) {
       this.isRefreshing = true;
 
-      try {
-        this.authService
-          .refreshToken(savedTokens.refreshToken)
-          .subscribe((tokens: LoginResponseModel) => {
+      this.authService
+        .refreshToken(savedTokens.refreshToken)
+        .pipe(
+          catchError(() => {
             this.isRefreshing = false;
+            this.authService.logout();
+            this.router.navigateByUrl('/auth/login');
+            return of();
+          })
+        )
+        .subscribe((tokens: LoginResponseModel) => {
+          this.isRefreshing = false;
+          localStorage.setItem('tokens', JSON.stringify(tokens));
 
-            localStorage.setItem('tokens', JSON.stringify(tokens));
-
-            const req: HttpRequest<unknown> = this.addAuthToken(request);
-            return req;
-          });
-      } catch (err: unknown) {
-        this.isRefreshing = false;
-        this.authService.logout();
-        this.router.navigateByUrl('/auth/login');
-      }
+          const req: HttpRequest<unknown> = this.addAuthToken(request);
+          return req;
+        });
     }
 
     return false;
