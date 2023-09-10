@@ -60,10 +60,6 @@ export class ChatSocketService {
 
       this.store.dispatch(chatActions.updateChat({ chat: payload.chat }));
 
-      if (this.chatService.isActiveChat(payload.chat)) {
-        this.store.dispatch(chatActions.setActiveChat({ chat: payload.chat }));
-      }
-
       localStorage.setItem('activeChatMessagesRead', 'true');
     });
   }
@@ -80,12 +76,6 @@ export class ChatSocketService {
           conversation: [...chat.conversation, payload.message],
         };
         this.store.dispatch(chatActions.updateChat({ chat: updatedChat }));
-
-        if (this.chatService.isActiveChat(chat)) {
-          this.store.dispatch(chatActions.setActiveChat({ chat: updatedChat }));
-        }
-        localStorage.setItem('activeChatMessagesRead', 'false');
-
         this.chats[this.chats.indexOf(chat)] = updatedChat;
       }
     });

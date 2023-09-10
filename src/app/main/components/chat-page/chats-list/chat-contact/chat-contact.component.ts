@@ -173,21 +173,18 @@ export class ChatContactComponent implements AfterViewInit, OnInit {
   private markMessagesAsRead() {
     if (this.chat?.conversation.length) {
       const messages: Message[] = this.chat.conversation;
+      const lastMessage: Message = messages[messages.length - 1];
 
-      for (let i = messages.length - 1; i >= 0; i--) {
-        const activeChatMessagesStatus: boolean = JSON.parse(
-          localStorage.getItem('activeChatMessagesRead') ?? 'false'
-        );
-        if (
-          messages[i].senderId !== this.chatService.getCurrUser.id &&
-          !activeChatMessagesStatus
-        ) {
-          if (!messages[i].isSeen) {
-            this.chatSocketService.markMessagesAsRead();
-            this.unreadMessageAmount = 0;
-          } else {
-            break;
-          }
+      const activeChatMessagesStatus: boolean = JSON.parse(
+        localStorage.getItem('activeChatMessagesRead') ?? 'false'
+      );
+      if (
+        lastMessage.senderId !== this.chatService.getCurrUser.id &&
+        !activeChatMessagesStatus
+      ) {
+        if (!lastMessage.isSeen) {
+          this.chatSocketService.markMessagesAsRead();
+          this.unreadMessageAmount = 0;
         }
       }
     }

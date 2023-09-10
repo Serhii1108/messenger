@@ -25,7 +25,7 @@ const reducer = createReducer(
   on(chatActions.updateChat, (state): ChatState => {
     return { ...state, isLoading: true };
   }),
-  on(chatActions.updateChat, (state, { chat }): ChatState => {
+  on(chatActions.updateChatSuccess, (state, { chat }): ChatState => {
     return {
       ...state,
       chats: [
