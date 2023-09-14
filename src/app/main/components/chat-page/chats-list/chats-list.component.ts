@@ -35,6 +35,8 @@ export class ChatsListComponent implements OnInit {
     private chatService: ChatService,
     private store: Store
   ) {
+    this.pinnedChatsIds = this.chatService.getPinnedChats;
+
     this.chatService.pinnedChatsIds$.subscribe((pinnedChatsIds: string[]) => {
       this.pinnedChatsIds = pinnedChatsIds;
     });
