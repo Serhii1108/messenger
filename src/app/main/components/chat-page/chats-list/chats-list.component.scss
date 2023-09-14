@@ -28,6 +28,56 @@
     justify-content: space-between;
     position: relative;
     padding: 0 20px 0 10px;
+    height: 85px;
+
+    .menu {
+      position: relative;
+      margin: 0;
+      padding: 0;
+
+      &__content-wrap {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+
+        width: 200px;
+        padding-bottom: 15px;
+        border-radius: 20px;
+        background-color: $secondary-color;
+        z-index: 2;
+
+        .close-btn {
+          margin: 5px 0 0 5px;
+        }
+
+        .content {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          row-gap: 8px;
+
+          padding: 0 10px;
+          margin: 0;
+
+          &__item {
+            padding: 7px 0 7px 30px;
+            border-radius: 10px;
+
+            transition: all 0.1s linear;
+            &:hover {
+              background-color: rgba(201, 201, 201, 0.2);
+            }
+
+            p {
+              padding: 0;
+              margin: 0;
+              font-size: 1.5rem;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
 
     .search-field {
       width: 100%;

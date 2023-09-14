@@ -1,10 +1,34 @@
 <section class="chats-list">
   <div class="chats-list__header">
-    <button mat-icon-button class="menu-btn" color="accent">
-      <mat-icon>menu</mat-icon>
-    </button>
+    <menu class="menu">
+      <button
+        mat-icon-button
+        class="menu__btn"
+        color="accent"
+        (click)="toggleMenu()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
 
-    <mat-form-field class="search-field">
+      <div class="menu__content-wrap" *ngIf="isMenuActive">
+        <button
+          mat-icon-button
+          class="close-btn"
+          color="accent"
+          (click)="toggleMenu()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <ul class="content">
+          <li class="content__item">
+            <p class="settings">Settings</p>
+          </li>
+        </ul>
+      </div>
+    </menu>
+
+    <mat-form-field class="search-field" *ngIf="!isMenuActive">
       <input
         matInput
         type="text"
@@ -23,7 +47,10 @@
       </button>
     </mat-form-field>
 
-    <div class="searched-contacts" *ngIf="searchValue.length > 1">
+    <div
+      class="searched-contacts"
+      *ngIf="searchValue.length > 1 && !isMenuActive"
+    >
       <div
         class="searched-contacts__contact"
         *ngFor="let user of searchedUsers"

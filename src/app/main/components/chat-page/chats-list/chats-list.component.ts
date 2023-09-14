@@ -24,6 +24,8 @@ export class ChatsListComponent implements OnInit {
   public searchValueUpdate: Subject<string> = new Subject<string>();
   public searchedUsers: BasicResponseModel[] = [];
 
+  public isMenuActive = false;
+
   public groups: [] = [];
 
   public chats$: Observable<Chat[]> = this.store.select(
@@ -52,6 +54,10 @@ export class ChatsListComponent implements OnInit {
     this.searchedUsers = [];
     this.searchValueUpdate.next('');
     this.store.dispatch(chatActions.createChat({ contactId }));
+  }
+
+  public toggleMenu(): void {
+    this.isMenuActive = !this.isMenuActive;
   }
 
   public toggleGroupClass(event: Event): void {
