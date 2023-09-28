@@ -5,10 +5,9 @@
   flex-direction: column;
   row-gap: 5px;
   background-color: $secondary-color-dark-transparent;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(3px);
   height: 100vh;
   width: 500px;
-  padding-top: 20px;
   box-sizing: border-box;
 
   ::-webkit-scrollbar {

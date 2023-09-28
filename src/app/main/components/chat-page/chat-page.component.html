@@ -5,4 +5,5 @@
     *ngIf="(activeChat$ | async) && (isLoading$ | async) === false"
     [chat]="activeChat$ | async"
   ></app-active-chat>
+  <router-outlet></router-outlet>
 </section>

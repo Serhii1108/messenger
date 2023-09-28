@@ -16,6 +16,7 @@ import { chatReducer } from '../store/reducers/chat.reducers';
 import { environment } from 'src/environments/environment';
 import { ChatSocketService } from './services/chat-socket.service';
 import { PinnedChatsFilterPipe } from './pipes/pinned-chats-filter.pipe';
+import { ChatThemeComponent } from './components/chat-page/chat-theme/chat-theme.component';
 
 const config: SocketIoConfig = {
   url: environment.apiUrl,
@@ -33,6 +34,7 @@ const config: SocketIoConfig = {
     ActiveChatComponent,
     MessageComponent,
     PinnedChatsFilterPipe,
+    ChatThemeComponent,
   ],
   imports: [
     CommonModule,
