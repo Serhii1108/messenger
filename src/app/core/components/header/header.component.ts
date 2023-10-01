@@ -13,9 +13,12 @@ export class HeaderComponent {
   public constructor(private translate: TranslateService) {
     const browserLang: string | undefined = this.translate.getBrowserLang();
     this.defaultLanguage = browserLang?.match(/en|ua/) ? browserLang : 'ua';
+    this.defaultLanguage = localStorage.getItem('lang') || this.defaultLanguage;
+    this.translate.use(this.defaultLanguage);
   }
 
   public setLanguage(e: MatSelectChange): void {
     this.translate.use(e.value);
+    localStorage.setItem('lang', e.value);
   }
 }

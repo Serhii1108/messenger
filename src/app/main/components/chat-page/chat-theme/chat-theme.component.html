@@ -1,7 +1,7 @@
 <section class="themes" (click)="closeTheme($event)">
   <div class="themes__container">
     <div class="themes__container__header">
-      <h3 class="title">Themes</h3>
+      <h3 class="title">{{ 'chatsList.menu.themes.title' | translate }}</h3>
       <button
         mat-icon-button
         class="close-btn"
@@ -13,7 +13,9 @@
     </div>
 
     <div class="themes__container__content">
-      <h4 class="category">Dark</h4>
+      <h4 class="category">
+        {{ 'chatsList.menu.themes.category.dark' | translate }}
+      </h4>
       <div class="theme-items">
         <div class="item" (click)="setTheme(1)">
           <img
@@ -65,7 +67,9 @@
         </div>
       </div>
 
-      <h4 class="category">Light</h4>
+      <h4 class="category">
+        {{ 'chatsList.menu.themes.category.light' | translate }}
+      </h4>
       <div class="theme-items">
         <div class="item" (click)="setTheme(9)">
           <img

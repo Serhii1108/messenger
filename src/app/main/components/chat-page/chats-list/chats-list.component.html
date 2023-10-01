@@ -23,7 +23,7 @@
         <ul class="content">
           <li class="content__item">
             <p class="themes" routerLink="./themes" (click)="toggleMenu()">
-              Themes
+              {{ 'chatsList.menu.themes.title' | translate }}
             </p>
           </li>
         </ul>
@@ -36,7 +36,7 @@
         type="text"
         [(ngModel)]="searchValue"
         (ngModelChange)="this.searchValueUpdate.next($event)"
-        placeholder="Search"
+        placeholder="{{ 'chatsList.search.placeholder' | translate }}"
       />
       <button
         *ngIf="searchValue"
@@ -66,7 +66,7 @@
         <p class="name" [innerHtml]="user.login | highlighter: searchValue"></p>
       </div>
       <p class="empty-users-info" *ngIf="!searchedUsers.length">
-        No user found
+        {{ 'chatsList.search.notFound' | translate }}
       </p>
     </div>
   </div>

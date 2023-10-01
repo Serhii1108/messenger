@@ -1,5 +1,6 @@
 {
   "mainPage": {
+    "description": "Introducing our Messenger App: A platform designed to simplify online communication. Chat with friends, family, and colleagues in real-time, effortlessly sharing messages, photos, and files. Our user-friendly interface ensures an intuitive messaging experience, making it easier than ever to stay connected. Join the conversation today and streamline your online communication",
     "buttons": {
       "login": "Login",
       "signUp": "Sign up"
@@ -11,7 +12,7 @@
   },
   "form": {
     "title": {
-      "login":"Login",
+      "login": "Login",
       "signUp": "Sign up"
     },
     "field": {
@@ -28,6 +29,21 @@
       "negQuestion": "Do not have an account?",
       "login": "login",
       "signUp": "Sign up"
+    }
+  },
+  "chatsList": {
+    "menu": {
+      "themes": {
+        "title": "Themes",
+        "category": {
+          "dark": "Dark",
+          "light": "Light"
+        }
+      }
+    },
+    "search": {
+      "placeholder": "Search",
+      "notFound": "No user found"
     }
   }
 }
