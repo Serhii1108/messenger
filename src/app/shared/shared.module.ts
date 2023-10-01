@@ -16,10 +16,11 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TranslateModule } from '@ngx-translate/core';
 import { HighlighterPipe } from './pipes/highlighter.pipe';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
-  declarations: [HighlighterPipe],
-  imports: [CommonModule],
+  declarations: [HighlighterPipe, SpinnerComponent],
+  imports: [CommonModule, MatProgressSpinnerModule],
   exports: [
     FormsModule,
     ReactiveFormsModule,
@@ -38,6 +39,7 @@ import { HighlighterPipe } from './pipes/highlighter.pipe';
     MatTooltipModule,
     TranslateModule,
     HighlighterPipe,
+    SpinnerComponent,
   ],
 })
 export class SharedModule {}
