@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "messenger-bb76a"
+  },
+  "targets": {
+    "messenger-bb76a": {
+      "hosting": {
+        "messenger": [
+          "messenger-bb76a"
+        ]
+      }
+    }
+  }
+}
