@@ -39,7 +39,7 @@ npm run start:prod
 
 ## License
 
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Serhii1108/messenger/blob/main/LICENSE)
 
 ## Author
 
