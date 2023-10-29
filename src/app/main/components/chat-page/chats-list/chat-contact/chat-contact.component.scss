@@ -1,0 +1,116 @@
+@import '/src/constance';
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  &:hover {
+    transition: all 0.03s linear;
+    background-color: rgba(217, 217, 217, 0.2);
+    transform: scale(1.01);
+  }
+
+  &.active {
+    background-color: rgba(217, 217, 217, 0.2);
+    border-radius: 0 10px 10px 0;
+    border-left: 3px solid $primary-color;
+    transform: scale(1.01);
+  }
+
+  &__icon {
+    position: relative;
+
+    .mat-badge-content {
+      top: -5px;
+      max-width: 35px;
+      min-width: 23px;
+      width: fit-content;
+      box-sizing: border-box;
+      height: 25px;
+      padding: 0 5px;
+      line-height: 25px;
+      background-color: $primary-color;
+    }
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+
+    .online-status {
+      position: absolute;
+      top: 70%;
+      left: 70%;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background-color: $primary-color;
+    }
+  }
+
+  &__title {
+    flex: 2;
+    margin-left: 15px;
+
+    .name {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+
+    .message {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      max-width: 300px;
+      margin: 0;
+      font-size: 1.5rem;
+      opacity: 0.8;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .last-message-time {
+      margin: 0;
+    }
+
+    .icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5px;
+
+      .unread-messages {
+        font-size: 1.2rem;
+        font-weight: bold;
+        margin: 0 5px 0 0;
+        padding: 3px 4px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        background-color: $primary-color;
+      }
+
+      .pin-img {
+        width: 15px;
+        padding: 5px;
+        border-radius: 30px;
+
+        &:hover {
+          background-color: #ffffff45;
+        }
+        &.active {
+          background-color: #ffffff30;
+        }
+      }
+    }
+  }
+}

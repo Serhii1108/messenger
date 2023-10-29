@@ -1,0 +1,27 @@
+<section class="container">
+  <div class="main-page">
+    <h1 class="title">Messenger</h1>
+    <p class="subtitle">
+      {{ 'mainPage.description' | translate }}
+    </p>
+
+    <div class="auth-btns-container">
+      <button
+        mat-raised-button
+        color="primary"
+        class="primary-bg"
+        routerLink="/auth/login"
+      >
+        {{ 'mainPage.buttons.login' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="primary-bg"
+        routerLink="/auth/sign-up"
+      >
+        {{ 'mainPage.buttons.signUp' | translate }}
+      </button>
+    </div>
+  </div>
+</section>

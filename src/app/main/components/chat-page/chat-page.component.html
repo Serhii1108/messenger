@@ -1,0 +1,9 @@
+<section class="chat-page">
+  <app-spinner *ngIf="isLoading$ | async"></app-spinner>
+  <app-chats-list></app-chats-list>
+  <app-active-chat
+    style="flex: 1"
+    [chat]="activeChat$ | async"
+  ></app-active-chat>
+  <router-outlet></router-outlet>
+</section>

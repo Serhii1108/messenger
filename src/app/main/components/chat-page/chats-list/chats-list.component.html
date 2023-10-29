@@ -1,0 +1,94 @@
+<section class="chats-list">
+  <div class="chats-list__header">
+    <menu class="menu">
+      <button
+        mat-icon-button
+        class="menu__btn"
+        color="accent"
+        (click)="toggleMenu()"
+      >
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <div class="menu__content-wrap" *ngIf="isMenuActive">
+        <button
+          mat-icon-button
+          class="close-btn"
+          color="accent"
+          (click)="toggleMenu()"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <ul class="content">
+          <li class="content__item">
+            <p class="themes" routerLink="./themes" (click)="toggleMenu()">
+              {{ 'chatsList.menu.themes.title' | translate }}
+            </p>
+          </li>
+        </ul>
+      </div>
+    </menu>
+
+    <mat-form-field class="search-field" *ngIf="!isMenuActive">
+      <input
+        matInput
+        type="text"
+        [(ngModel)]="searchValue"
+        (ngModelChange)="this.searchValueUpdate.next($event)"
+        placeholder="{{ 'chatsList.search.placeholder' | translate }}"
+      />
+      <button
+        *ngIf="searchValue"
+        matSuffix
+        mat-icon-button
+        aria-label="Clear"
+        (click)="searchValue = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <div
+      class="searched-contacts"
+      *ngIf="searchValue.length > 1 && !isMenuActive"
+    >
+      <div
+        class="searched-contacts__contact"
+        *ngFor="let user of searchedUsers"
+        (click)="addContact(user.id)"
+      >
+        <img
+          class="icon"
+          src="https://placehold.co/200x200"
+          alt="Contact icon"
+        />
+        <p class="name" [innerHtml]="user.login | highlighter: searchValue"></p>
+      </div>
+      <p class="empty-users-info" *ngIf="!searchedUsers.length">
+        {{ 'chatsList.search.notFound' | translate }}
+      </p>
+    </div>
+  </div>
+
+  <div class="chats-list__groups">
+    <div
+      class="group"
+      *ngFor="let i of groups"
+      (click)="toggleGroupClass($event)"
+      matBadge=""
+      matBadgeOverlap="false"
+    >
+      {{ i }}
+      <div class="underline"></div>
+    </div>
+  </div>
+
+  <div class="chats-list__contacts">
+    <app-chat-contact
+      *ngFor="let chat of chats$ | async | pinnedChatsFilter: pinnedChatsIds"
+      [chat]="chat"
+    >
+    </app-chat-contact>
+  </div>
+</section>

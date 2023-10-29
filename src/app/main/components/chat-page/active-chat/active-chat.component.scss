@@ -1,0 +1,75 @@
+@import '/src/constance';
+
+.active-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  box-sizing: border-box;
+  background-color: $secondary-color-dark-transparent;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 10px 10px 20px;
+    backdrop-filter: blur(3px);
+
+    .info {
+      display: flex;
+      align-items: center;
+      column-gap: 15px;
+
+      &__icon {
+        width: 50px;
+        border-radius: 50%;
+      }
+    }
+
+    .buttons {
+      display: flex;
+      column-gap: 10px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    row-gap: 10px;
+    width: 100%;
+    max-height: calc(100vh - 75px);
+
+    ::-webkit-scrollbar {
+      height: 6px;
+      width: 5px;
+      background-color: transparent;
+      border-radius: 30px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: $secondary-color-dark-transparent;
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+    }
+
+    .messages-container {
+      width: 100%;
+      overflow-y: scroll;
+
+      .messages {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 50px;
+        box-sizing: border-box;
+        font-size: 1.6rem;
+      }
+    }
+
+    .send-field {
+      width: 100%;
+      max-width: 800px;
+      font-size: 1.8rem;
+    }
+  }
+}

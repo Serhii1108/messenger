@@ -1,0 +1,125 @@
+<section class="themes" (click)="closeTheme($event)">
+  <div class="themes__container">
+    <div class="themes__container__header">
+      <h3 class="title">{{ 'chatsList.menu.themes.title' | translate }}</h3>
+      <button
+        mat-icon-button
+        class="close-btn"
+        color="accent"
+        routerLink="/chat"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="themes__container__content">
+      <h4 class="category">
+        {{ 'chatsList.menu.themes.category.dark' | translate }}
+      </h4>
+      <div class="theme-items">
+        <div class="item" (click)="setTheme(1)">
+          <img
+            src="../../../../../assets/images/themes/small/1.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(2)">
+          <img
+            src="../../../../../assets/images/themes/small/2.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(3)">
+          <img
+            src="../../../../../assets/images/themes/small/3.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(4)">
+          <img
+            src="../../../../../assets/images/themes/small/4.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(5)">
+          <img
+            src="../../../../../assets/images/themes/small/5.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(6)">
+          <img
+            src="../../../../../assets/images/themes/small/6.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(7)">
+          <img
+            src="../../../../../assets/images/themes/small/7.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(8)">
+          <img
+            src="../../../../../assets/images/themes/small/8.jpg"
+            alt="theme"
+          />
+        </div>
+      </div>
+
+      <h4 class="category">
+        {{ 'chatsList.menu.themes.category.light' | translate }}
+      </h4>
+      <div class="theme-items">
+        <div class="item" (click)="setTheme(9)">
+          <img
+            src="../../../../../assets/images/themes/small/9.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(10)">
+          <img
+            src="../../../../../assets/images/themes/small/10.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(11)">
+          <img
+            src="../../../../../assets/images/themes/small/11.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(12)">
+          <img
+            src="../../../../../assets/images/themes/small/12.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(13)">
+          <img
+            src="../../../../../assets/images/themes/small/13.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(14)">
+          <img
+            src="../../../../../assets/images/themes/small/14.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(15)">
+          <img
+            src="../../../../../assets/images/themes/small/15.jpg"
+            alt="theme"
+          />
+        </div>
+        <div class="item" (click)="setTheme(16)">
+          <img
+            src="../../../../../assets/images/themes/small/16.jpg"
+            alt="theme"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,15 @@
+<header class="header">
+  <div class="header__container">
+    <div class="header__logo-wrap">
+      <span class="logo" routerLink="/">LOGO</span>
+      <mat-select
+        class="header__lang-selection"
+        [(value)]="defaultLanguage"
+        (selectionChange)="setLanguage($event)"
+      >
+        <mat-option value="ua">ua</mat-option>
+        <mat-option value="en">en</mat-option>
+      </mat-select>
+    </div>
+  </div>
+</header>

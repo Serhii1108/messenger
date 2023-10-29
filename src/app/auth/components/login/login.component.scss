@@ -1,0 +1,46 @@
+@import '/src/constance';
+
+.login-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 50px;
+  width: 450px;
+
+  .title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    border-bottom: 3px solid $primary-color;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 85%;
+    font-size: 2rem;
+    row-gap: 1rem;
+
+    .submit-btn {
+      font-size: 2rem;
+      margin: 30px auto 0 auto;
+      padding: 5px 15px;
+    }
+  }
+
+  .sign-up-btn {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    p {
+      font-size: 1.7rem;
+      margin: 0;
+    }
+
+    button {
+      margin: 10px auto 0 auto;
+      font-size: 1.7rem;
+      color: $primary-color;
+    }
+  }
+}

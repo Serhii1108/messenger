@@ -1,0 +1,30 @@
+@import '/src/constance';
+
+.main-page {
+  .title {
+    display: inline;
+    padding-bottom: 5px;
+    font-size: 6rem;
+    border-bottom: 5px solid $primary-color;
+    border-radius: 5px;
+  }
+
+  .subtitle {
+    font-size: 2.5rem;
+    font-weight: 200;
+    line-height: 3.5rem;
+    margin-top: 5rem;
+  }
+
+  .auth-btns-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0 auto;
+    margin-top: 60px;
+
+    button {
+      font-size: 2.2rem;
+      padding: 5px 20px;
+    }
+  }
+}

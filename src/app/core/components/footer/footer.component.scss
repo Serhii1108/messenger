@@ -1,0 +1,27 @@
+@import '/src/constance';
+
+footer {
+  top: 90%;
+  text-align: center;
+
+  .footer-content {
+    font-family: $primary-font;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+    line-height: 35px;
+  }
+
+  .github-link {
+    font-family: $primary-font;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding-bottom: 3px;
+
+    transition: all 0.2s linear;
+    border-bottom: solid 2px transparent;
+
+    &:hover {
+      border-bottom: solid 2px $primary-color;
+    }
+  }
+}

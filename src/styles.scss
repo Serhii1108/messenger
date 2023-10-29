@@ -1,0 +1,139 @@
+@import 'constance';
+
+html,
+body {
+  height: 100vh;
+  font-size: $basic-font-size;
+  scroll-behavior: smooth;
+}
+body {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-family: $secondary-font;
+  background: #1d1d1d;
+  background-image: url('./assets/images/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+p,
+div,
+a {
+  margin: 0;
+  padding: 0;
+  color: #ededed;
+  font-family: $secondary-font;
+}
+h1,
+h2,
+h3,
+h4 {
+  margin: 0;
+  padding: 0;
+  color: #ededed;
+  font-family: $primary-font !important;
+  letter-spacing: 1.5px !important;
+  line-height: normal !important;
+}
+button {
+  font-family: $primary-font !important;
+  letter-spacing: 1.5px;
+}
+button.primary-bg {
+  background-color: $primary-color !important;
+}
+ul,
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  outline: none;
+}
+h1::first-letter,
+h2::first-letter,
+h3::first-letter,
+a::first-letter,
+button::first-letter {
+  text-transform: capitalize;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  left: 65%;
+  top: 25%;
+
+  width: 100%;
+  max-width: 580px;
+}
+
+.highlighted-text {
+  background-color: $primary-color;
+}
+
+// Form
+.mat-mdc-text-field-wrapper {
+  background-color: transparent !important;
+  .mat-mdc-form-field-focus-overlay {
+    background-color: transparent;
+  }
+}
+.mdc-text-field,
+.mdc-text-field--no-label {
+  .mat-mdc-form-field-infix {
+    padding: 5px 0 !important;
+    min-height: 50px !important;
+    display: flex !important;
+    align-items: end !important;
+    font-family: $secondary-font !important;
+  }
+  .mdc-floating-label {
+    transform: translateY(-10%) !important;
+
+    &--float-above {
+      transform: translateY(-130%) scale(0.75) !important;
+    }
+  }
+}
+
+.mdc-text-field {
+  padding: 5px !important;
+
+  &__input {
+    caret-color: $chat-color !important;
+  }
+
+  &--filled .mdc-line-ripple::after {
+    border-bottom-color: $chat-color !important;
+  }
+
+  &--invalid {
+    .mdc-floating-label {
+      color: $primary-color !important;
+    }
+    .mdc-line-ripple::before,
+    .mdc-line-ripple::after {
+      border-bottom-color: $primary-color !important;
+    }
+  }
+
+  &--focused {
+    .mdc-floating-label {
+      color: $chat-color !important;
+    }
+    .mdc-line-ripple::before,
+    .mdc-line-ripple::after {
+      border-bottom-color: $chat-color !important;
+    }
+  }
+}
